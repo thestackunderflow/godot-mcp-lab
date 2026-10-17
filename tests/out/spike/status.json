@@ -1,0 +1,23 @@
+{
+ "tool": "godot_health_check",
+ "reply": {
+  "content": [
+   {
+    "text": "{\"server\":\"godot-mcp\",\"version\":\"2026.10.15\",\"transport\":\"stdio\",\"bridge_url\":\"ws://localhost:9080\",\"bridge_connected\":true,\"addon_version\":\"2026.10.15\",\"version_notice\":null,\"bridge_bind_error\":null}",
+    "type": "text"
+   }
+  ],
+  "isError": false,
+  "structuredContent": {
+   "server": "godot-mcp",
+   "version": "2026.10.15",
+   "transport": "stdio",
+   "bridge_url": "ws://localhost:9080",
+   "bridge_connected": true,
+   "addon_version": "2026.10.15",
+   "version_notice": null,
+   "bridge_bind_error": null
+  }
+ },
+ "after_s": 6
+}
