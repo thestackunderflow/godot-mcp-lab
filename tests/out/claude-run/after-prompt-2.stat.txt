@@ -1,0 +1,8 @@
+commit 697017c1898042ef12a794614fd7a269f1b2492b
+Author: lab <lab@localhost>
+Date:   Sat Oct 17 15:57:59 2026 -0400
+
+    after prompt 2
+
+ game/scenes/level.tscn | 38 +++++++++++++++++++++++++-------------
+ 1 file changed, 25 insertions(+), 13 deletions(-)

@@ -10,13 +10,17 @@ LAB="$(pwd -W 2>/dev/null || pwd)"
 OUT=tests/out/${RUN_DIR:-claude-run}
 rm -rf "$OUT" claude-run/work && mkdir -p "$OUT" claude-run/work
 cp -r game claude-run/work/game && rm -rf claude-run/work/game/.godot
+# import the project once up front (as a desktop user's already-opened project would be), so the editor boots fast
+MSYS_NO_PATHCONV=1 docker run --rm -v "$LAB:/work" godot-mcp-lab:4.7.2 sh -c 'cd /work/claude-run/work/game && timeout 120 godot --headless --path . --import >/dev/null 2>&1; true'
+printf '.godot/
+' > claude-run/work/.gitignore
 (cd claude-run/work && git init -q && git add -A && git -c user.name=lab -c user.email=lab@localhost commit -qm "start")
 
 cat > claude-run/mcp-godot.json <<JSON
 { "mcpServers": { "godot": {
   "command": "docker",
   "args": ["run", "-i", "--rm", "--init",
-           "-v", "$LAB:/work", "-e", "GAME=/work/claude-run/work/game", "-e", "LOGS=/work/$OUT",
+           "-v", "$LAB:/work", "-e", "GAME=/work/claude-run/work/game", "-e", "WAIT_EDITOR=15", "-e", "LOGS=/work/$OUT",
            "godot-mcp-lab:4.7.2",
            "python3", "/work/proxy/mcp_log_proxy.py", "--log", "/work/$OUT/godot-mcp.jsonl", "--png-dir", "/work/$OUT",
            "--", "/work/run-server.sh"] } } }

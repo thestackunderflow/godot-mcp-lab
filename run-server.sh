@@ -16,4 +16,7 @@ godot --headless --editor --path "$GAME" >"$LOGS/editor.log" 2>&1 &
 EDITOR=$!
 cleanup() { pkill -P "$EDITOR" 2>/dev/null; kill "$EDITOR" "$XVFB" 2>/dev/null; wait 2>/dev/null; }
 trap cleanup EXIT
+# WAIT_EDITOR=<seconds>: give the editor a head start, like a desktop where Godot is already open before the agent
+# starts (the add-on reconnects to the bridge on its own once the server is up). The tests poll instead (unset).
+sleep "${WAIT_EDITOR:-0}"
 godot-editor-mcp

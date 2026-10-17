@@ -1,0 +1,91 @@
+diff --git a/game/scenes/level.tscn b/game/scenes/level.tscn
+index 880f36a..5d9810b 100644
+--- a/game/scenes/level.tscn
++++ b/game/scenes/level.tscn
+@@ -1,4 +1,4 @@
+-[gd_scene load_steps=4 format=3]
++[gd_scene format=3 uid="uid://cf7m0r15lynp3"]
+ 
+ [ext_resource type="PackedScene" path="res://scenes/player.tscn" id="1"]
+ 
+@@ -8,56 +8,68 @@ size = Vector2(1200, 40)
+ [sub_resource type="RectangleShape2D" id="ledge_shape"]
+ size = Vector2(240, 24)
+ 
+-[node name="Level" type="Node2D"]
++[node name="Level" type="Node2D" unique_id=758103525]
+ 
+-[node name="Floor" type="StaticBody2D" parent="."]
++[node name="Floor" type="StaticBody2D" parent="." unique_id=1710664081]
+ position = Vector2(600, 620)
+ 
+-[node name="Look" type="ColorRect" parent="Floor"]
++[node name="Look" type="ColorRect" parent="Floor" unique_id=1131853407]
+ offset_left = -600.0
+ offset_top = -20.0
+ offset_right = 600.0
+ offset_bottom = 20.0
+ color = Color(0.29, 0.333, 0.408, 1)
+ 
+-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
++[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1445608708]
+ shape = SubResource("floor_shape")
+ 
+-[node name="Ledge" type="StaticBody2D" parent="."]
++[node name="Ledge" type="StaticBody2D" parent="." unique_id=386079952]
+ position = Vector2(300, 260)
+ 
+-[node name="Look" type="ColorRect" parent="Ledge"]
++[node name="Look" type="ColorRect" parent="Ledge" unique_id=727079879]
+ offset_left = -120.0
+ offset_top = -12.0
+ offset_right = 120.0
+ offset_bottom = 12.0
+ color = Color(0.29, 0.333, 0.408, 1)
+ 
+-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ledge"]
++[node name="CollisionShape2D" type="CollisionShape2D" parent="Ledge" unique_id=207476162]
+ shape = SubResource("ledge_shape")
+ 
+-[node name="Coins" type="Node2D" parent="."]
++[node name="Coins" type="Node2D" parent="." unique_id=1526665950]
+ 
+-[node name="Coin1" type="ColorRect" parent="Coins"]
++[node name="Coin1" type="ColorRect" parent="Coins" unique_id=124131909]
+ offset_left = 640.0
+ offset_top = 520.0
+ offset_right = 656.0
+ offset_bottom = 536.0
+ color = Color(0.957, 0.722, 0.125, 1)
+ 
+-[node name="Coin2" type="ColorRect" parent="Coins"]
++[node name="Coin2" type="ColorRect" parent="Coins" unique_id=78763344]
+ offset_left = 800.0
+ offset_top = 480.0
+ offset_right = 816.0
+ offset_bottom = 496.0
+ color = Color(0.957, 0.722, 0.125, 1)
+ 
+-[node name="Coin3" type="ColorRect" parent="Coins"]
++[node name="Coin3" type="ColorRect" parent="Coins" unique_id=1052169343]
+ offset_left = 960.0
+ offset_top = 520.0
+ offset_right = 976.0
+ offset_bottom = 536.0
+ color = Color(0.957, 0.722, 0.125, 1)
+ 
+-[node name="Player" parent="." instance=ExtResource("1")]
++[node name="Player" parent="." unique_id=1081080617 instance=ExtResource("1")]
+ position = Vector2(300, 220)
++
++[node name="HUD" type="CanvasLayer" parent="." unique_id=100647099]
++
++[node name="ObjectiveLabel" type="Label" parent="HUD" unique_id=2044164756]
++offset_left = 16.0
++offset_top = 16.0
++offset_right = 126.0
++offset_bottom = 39.0
++theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
++theme_override_constants/outline_size = 6
++theme_override_font_sizes/font_size = 28
++text = "Collect 3 coins"

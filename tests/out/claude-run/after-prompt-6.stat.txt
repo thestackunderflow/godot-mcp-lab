@@ -1,0 +1,8 @@
+commit 17d0e8dda6bf024f425a53d3c4265d4c290f81e8
+Author: lab <lab@localhost>
+Date:   Sat Oct 17 16:07:58 2026 -0400
+
+    after prompt 5
+
+ game/scripts/player.gd | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)

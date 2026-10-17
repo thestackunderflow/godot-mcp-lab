@@ -1,0 +1,17 @@
+diff --git a/game/scripts/player.gd b/game/scripts/player.gd
+index ad7f758..a26f86b 100644
+--- a/game/scripts/player.gd
++++ b/game/scripts/player.gd
+@@ -12,10 +12,11 @@ var air_jumps_left := 0
+ func _physics_process(delta: float) -> void:
+ 	if not is_on_floor():
+ 		velocity.y += gravity * delta
++	else:
++		air_jumps_left = 1
+ 	if Input.is_action_just_pressed("jump"):
+ 		if is_on_floor():
+ 			velocity.y = JUMP_VELOCITY
+-			air_jumps_left = 1
+ 		elif air_jumps_left > 0:
+ 			velocity.y = AIR_JUMP_VELOCITY
+ 			air_jumps_left -= 1

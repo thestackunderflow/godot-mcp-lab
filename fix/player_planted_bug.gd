@@ -1,6 +1,5 @@
 extends CharacterBody2D
-## Double jump with a PLANTED bug (from the brief): the extra jump is only granted when the player jumps from
-## the floor. Walk off a ledge without jumping, press jump in mid-air, and nothing happens.
+## The player: walk left/right, jump from the ground, and one extra jump in the air.
 
 const SPEED := 220.0
 const JUMP_VELOCITY := -420.0
