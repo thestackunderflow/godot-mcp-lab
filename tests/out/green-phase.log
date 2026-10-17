@@ -2,7 +2,7 @@
 platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.7.0 -- /usr/local/bin/python3
 rootdir: /work
 plugins: platformdirs-4.13.3, anyio-4.15.1
-collecting ... collected 9 items
+collecting ... collected 10 items
 
 tests/test_lab.py::TestEditorSession::test_0_versions PASSED
 tests/test_lab.py::TestEditorSession::test_1_gated_surface PASSED
@@ -13,5 +13,6 @@ tests/test_lab.py::TestEditorSession::test_5_script_check PASSED
 tests/test_lab.py::test_6_shipped_game_single_jump PASSED
 tests/test_lab.py::test_7_reference_double_jump PASSED
 tests/test_lab.py::test_8_planted_bug_walk_off_ledge PASSED
+tests/test_lab.py::test_9_fastmcp_update_check_switch PASSED
 
-============================== 9 passed in 27.51s ==============================
+============================= 10 passed in 37.99s ==============================

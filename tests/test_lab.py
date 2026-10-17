@@ -178,11 +178,18 @@ def jump_test(tag, player):
         vy = lambda: sess.data("godot_runtime_read_property", {"node_path": "/root/Level/Player", "property": "velocity"})["value"]["y"]
         press = lambda: (sess.data("godot_input_simulate_action", {"action": "jump", "pressed": True}), time.sleep(0.05),
                          sess.data("godot_input_simulate_action", {"action": "jump", "pressed": False}))
-        out = {"start_y": sess.data("godot_runtime_read_property", {"node_path": "/root/Level/Player", "property": "position"})["value"]["y"]}
-        press(); time.sleep(0.05); out["after_1st"] = vy()
-        time.sleep(0.35); out["before_2nd"] = vy()
-        press(); time.sleep(0.05); out["after_2nd"] = vy()
-        time.sleep(0.15); press(); time.sleep(0.05); out["after_3rd"] = vy()
+        pos_y = lambda: sess.data("godot_runtime_read_property", {"node_path": "/root/Level/Player", "property": "position"})["value"]["y"]
+        out = {"start_y": pos_y()}
+        press(); out["after_1st"] = vy()
+        # Wait for the top of the arc (rising slows to ~0), so the 2nd press arrives well before landing (a jump lasts ~0.86 s).
+        for _ in range(20):
+            if vy() > -120:
+                break
+        out["y_before_2nd"] = pos_y()
+        out["before_2nd"] = vy()
+        press(); out["after_2nd"] = vy()
+        out["y_before_3rd"] = pos_y()
+        press(); out["after_3rd"] = vy()
         shot = sess.call("godot_runtime_capture_game_screenshot")
         img = next((c for c in shot.get("content", []) if c.get("type") == "image"), None)
         if img:
@@ -225,18 +232,23 @@ def walk_off_test(tag, player):
         sess.close()
 
 
-JUMPED = -150   # velocity.y below this right after a press = a jump happened (jumps are -420 / -360; gravity adds +49 in 0.05 s)
+JUMPED = -150   # velocity.y below this right after a press = a jump happened (jumps are -420 / -360; a reading arrives
+                # ~0.1 s later, so gravity has added ~+100 by then)
 
 
 def test_6_shipped_game_single_jump():
     r = jump_test("06_single_jump", None)
     assert r["after_1st"] < JUMPED                        # the first jump works
+    assert r["y_before_2nd"] < r["start_y"] - 40          # the 2nd press really happened in the air
     assert r["after_2nd"] > JUMPED                        # no second jump in the shipped game
 
 
 def test_7_reference_double_jump():
     r = jump_test("07_double_jump", "player_double_jump.gd")
-    assert r["after_1st"] < JUMPED and r["after_2nd"] < JUMPED   # the second jump works
+    assert r["after_1st"] < JUMPED
+    assert r["y_before_2nd"] < r["start_y"] - 40                 # in the air: so a jump now can only be the air jump
+    assert r["after_2nd"] < JUMPED                               # the second (air) jump works
+    assert r["y_before_3rd"] < r["start_y"] - 40                 # still in the air
     assert r["after_3rd"] > JUMPED                               # a third is blocked
 
 
@@ -248,3 +260,30 @@ def test_8_planted_bug_walk_off_ledge():
     assert bug["falling_pos"]["y"] < 500 and good["falling_pos"]["y"] < 500   # pressed well above the floor (floor top ~600)
     assert bug["after_air_jump"] > 0                             # the bug: no jump, still falling (not landed)
     assert good["after_air_jump"] < JUMPED                       # the reference: the air jump works
+
+
+def test_9_fastmcp_update_check_switch():
+    """At start the server's framework (FastMCP) checks PyPI for a newer FastMCP (at most every 12 h, cached). FASTMCP_CHECK_FOR_UPDATES=off stops it.
+    (godot-mcp's own update check is opt-in, GODOT_MCP_CHECK_UPDATES, and off by default.)"""
+    def first_lines(env_extra):
+        saved = {k: os.environ.get(k) for k in env_extra}
+        os.environ.update(env_extra)
+        try:
+            m = mc.McpClient(["godot-editor-mcp"])
+            m.start()                      # a real MCP handshake (initialize + initialized)
+            m.request("tools/list", {})
+            time.sleep(3)
+            m.close()
+            time.sleep(1)
+            return "\n".join(m.stderr_text())
+        finally:
+            for k, v in saved.items():
+                if v is None: os.environ.pop(k, None)
+                else: os.environ[k] = v
+    # FastMCP caches the answer for 12 h in its home folder (version_check.py, CACHE_TTL_SECONDS): use a fresh one each time
+    default = first_lines({"FASTMCP_HOME": "/tmp/fastmcp-home-default"})
+    off = first_lines({"FASTMCP_HOME": "/tmp/fastmcp-home-off", "FASTMCP_CHECK_FOR_UPDATES": "off"})
+    hit = lambda e: "pypi.org/pypi/fastmcp/json" in e
+    save("09_update_check.json", {"default_requests_pypi": hit(default), "with_FASTMCP_CHECK_FOR_UPDATES_off": hit(off)})
+    assert hit(default) is True
+    assert hit(off) is False

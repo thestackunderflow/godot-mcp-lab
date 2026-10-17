@@ -27,11 +27,10 @@ bash claude-run/run-claude.sh            # optional: the real Claude Code sessio
 
 ## The tests
 
-Written first and run red (`tests/out/red-phase.log`: stub client), then green (`tests/out/green-phase.log`: **9 passed**).
+Written first and run red (`tests/out/red-phase.log`: stub client), then green (`tests/out/green-phase.log`: **10 passed**).
 
 0. **Versions.** Godot `4.7.2.stable.official`; server and add-on `2026.10.15`, bridge connected. In `initialize` the
-   server names itself `godot-mcp` with **FastMCP's version (4.1.0)**, not the package's. At startup it requests
-   `https://pypi.org/pypi/fastmcp/json` (an update check).
+   server names itself `godot-mcp` with **FastMCP's version (4.1.0)**, not the package's.
 1. **Gated tools.** 29 toolsets; only `core` and `inspection` are on by default: **24 tools, 34,549 characters** of
    tool JSON. With every toolset enabled: **194 tools, 237,669 characters**. Each enable sends
    `notifications/tools/list_changed` (27 seen).
@@ -42,11 +41,16 @@ Written first and run red (`tests/out/red-phase.log`: stub client), then green (
    restores it. `delete_node` without `confirm: true` is refused.
 5. **Script check.** A missing colon on line 3 is reported as "Unexpected Indent" **on line 4**. The real player
    script parses.
-6. **Closed loop, shipped game** (played in Xvfb, input injected through the runtime probe, velocity read live). The
-   first jump gives −338; a second press in mid-air gives +331 (no jump).
-7. **Reference double jump.** The second press gives −262 (a jump); a third gives +114 (blocked).
+6. **Closed loop, shipped game** (played in Xvfb, input injected through the runtime probe, velocity read live; each
+   reading arrives ~0.1 s after the press, so gravity has already added ~+100). The first jump reads −371; a second
+   press near the top of the arc (y = 138, 90 px above the ledge) reads +348: no jump.
+7. **Reference double jump.** The same second press, in mid-air, reads −311 (the air jump); a third press, still in
+   the air (y = 122), reads −33: blocked (the jump speeds themselves are −420 and −360).
 8. **Planted bug.** Walk off the ledge and press jump at y = 316, well above the floor: the bug version keeps falling
    (+621), while the reference jumps (−278).
+9. **Update check.** At start the server's *framework*, FastMCP, asks PyPI for a newer FastMCP (at most every 12 h; it
+   caches the answer). `FASTMCP_CHECK_FOR_UPDATES=off` stops it. godot-mcp's own update check is opt-in
+   (`GODOT_MCP_CHECK_UPDATES`) and off by default.
 
 Game screenshots taken by the server: `tests/out/06_single_jump_game.png`, `07_double_jump_game.png`.
 
