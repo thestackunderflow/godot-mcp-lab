@@ -121,7 +121,7 @@ class TestEditorSession:
         tree = s.data("godot_inspection_get_scene_tree")["tree"]
         names = [c["name"] for c in tree["children"]]
         save("03_scene_tree.json", tree)
-        assert tree["name"] == "Level" and names == ["Floor", "Ledge", "Player"]
+        assert tree["name"] == "Level" and names == ["Floor", "Ledge", "Coins", "Player"]
 
 
     def test_4_edit_with_undo(self, s):

@@ -11,6 +11,13 @@
    "script": null,
    "children": [
     {
+     "name": "Look",
+     "type": "ColorRect",
+     "path": "Floor/Look",
+     "script": null,
+     "children": []
+    },
+    {
      "name": "CollisionShape2D",
      "type": "CollisionShape2D",
      "path": "Floor/CollisionShape2D",
@@ -26,9 +33,45 @@
    "script": null,
    "children": [
     {
+     "name": "Look",
+     "type": "ColorRect",
+     "path": "Ledge/Look",
+     "script": null,
+     "children": []
+    },
+    {
      "name": "CollisionShape2D",
      "type": "CollisionShape2D",
      "path": "Ledge/CollisionShape2D",
+     "script": null,
+     "children": []
+    }
+   ]
+  },
+  {
+   "name": "Coins",
+   "type": "Node2D",
+   "path": "Coins",
+   "script": null,
+   "children": [
+    {
+     "name": "Coin1",
+     "type": "ColorRect",
+     "path": "Coins/Coin1",
+     "script": null,
+     "children": []
+    },
+    {
+     "name": "Coin2",
+     "type": "ColorRect",
+     "path": "Coins/Coin2",
+     "script": null,
+     "children": []
+    },
+    {
+     "name": "Coin3",
+     "type": "ColorRect",
+     "path": "Coins/Coin3",
      "script": null,
      "children": []
     }
@@ -41,9 +84,9 @@
    "script": "res://scripts/player.gd",
    "children": [
     {
-     "name": "Sprite2D",
-     "type": "Sprite2D",
-     "path": "Player/Sprite2D",
+     "name": "Body",
+     "type": "ColorRect",
+     "path": "Player/Body",
      "script": null,
      "owner": "res://scenes/player.tscn",
      "children": []

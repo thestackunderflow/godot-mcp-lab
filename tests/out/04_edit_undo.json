@@ -10,6 +10,7 @@
  "after_dry_run": [
   "Floor",
   "Ledge",
+  "Coins",
   "Player"
  ],
  "create_reply": {
@@ -23,6 +24,7 @@
  "with_label": [
   "Floor",
   "Ledge",
+  "Coins",
   "Player",
   "Hint"
  ],
@@ -58,6 +60,7 @@
  "after_undo": [
   "Floor",
   "Ledge",
+  "Coins",
   "Player"
  ],
  "redo": {
@@ -70,6 +73,7 @@
  "after_redo": [
   "Floor",
   "Ledge",
+  "Coins",
   "Player",
   "Hint"
  ],
@@ -85,6 +89,7 @@
  "after_delete_without_confirm": [
   "Floor",
   "Ledge",
+  "Coins",
   "Player",
   "Hint"
  ]

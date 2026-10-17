@@ -2,3 +2,5 @@ game/.godot/
 game/addons/
 __pycache__/
 .pytest_cache/
+claude-run/work/
+claude-run/mcp-godot.json

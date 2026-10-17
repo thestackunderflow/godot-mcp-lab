@@ -13,14 +13,51 @@ size = Vector2(240, 24)
 [node name="Floor" type="StaticBody2D" parent="."]
 position = Vector2(600, 620)
 
+[node name="Look" type="ColorRect" parent="Floor"]
+offset_left = -600.0
+offset_top = -20.0
+offset_right = 600.0
+offset_bottom = 20.0
+color = Color(0.29, 0.333, 0.408, 1)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
 shape = SubResource("floor_shape")
 
 [node name="Ledge" type="StaticBody2D" parent="."]
 position = Vector2(300, 260)
 
+[node name="Look" type="ColorRect" parent="Ledge"]
+offset_left = -120.0
+offset_top = -12.0
+offset_right = 120.0
+offset_bottom = 12.0
+color = Color(0.29, 0.333, 0.408, 1)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ledge"]
 shape = SubResource("ledge_shape")
+
+[node name="Coins" type="Node2D" parent="."]
+
+[node name="Coin1" type="ColorRect" parent="Coins"]
+offset_left = 640.0
+offset_top = 520.0
+offset_right = 656.0
+offset_bottom = 536.0
+color = Color(0.957, 0.722, 0.125, 1)
+
+[node name="Coin2" type="ColorRect" parent="Coins"]
+offset_left = 800.0
+offset_top = 480.0
+offset_right = 816.0
+offset_bottom = 496.0
+color = Color(0.957, 0.722, 0.125, 1)
+
+[node name="Coin3" type="ColorRect" parent="Coins"]
+offset_left = 960.0
+offset_top = 520.0
+offset_right = 976.0
+offset_bottom = 536.0
+color = Color(0.957, 0.722, 0.125, 1)
 
 [node name="Player" parent="." instance=ExtResource("1")]
 position = Vector2(300, 220)
