@@ -1,0 +1,38 @@
+{
+ "broken": {
+  "content": [
+   {
+    "text": "{\"script_path\":\"res://scripts/broken.gd\",\"ok\":false,\"errors\":[{\"message\":\"Unexpected \\\"Indent\\\" in class body.\",\"source\":\"res://scripts/broken.gd\",\"line\":4}],\"rescan_pending\":false}",
+    "type": "text"
+   }
+  ],
+  "isError": false,
+  "structuredContent": {
+   "script_path": "res://scripts/broken.gd",
+   "ok": false,
+   "errors": [
+    {
+     "message": "Unexpected \"Indent\" in class body.",
+     "source": "res://scripts/broken.gd",
+     "line": 4
+    }
+   ],
+   "rescan_pending": false
+  }
+ },
+ "player": {
+  "content": [
+   {
+    "text": "{\"script_path\":\"res://scripts/player.gd\",\"ok\":true,\"errors\":[],\"rescan_pending\":false}",
+    "type": "text"
+   }
+  ],
+  "isError": false,
+  "structuredContent": {
+   "script_path": "res://scripts/player.gd",
+   "ok": true,
+   "errors": [],
+   "rescan_pending": false
+  }
+ }
+}

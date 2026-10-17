@@ -1,0 +1,487 @@
+{
+ "content": [
+  {
+   "text": "{\"server\":\"godot-mcp\",\"version\":\"2026.10.15\",\"contract_version\":1,\"min_compatible_contract\":1,\"transport\":\"stdio\",\"toolsets\":[{\"name\":\"core\",\"enabled\":true,\"description\":\"Always-on diagnostics and toolset management.\",\"tool_count\":13,\"min_godot\":null},{\"name\":\"inspection\",\"enabled\":true,\"description\":\"Read-only project, scene, and node inspection.\",\"tool_count\":11,\"min_godot\":null},{\"name\":\"scene_edit\",\"enabled\":false,\"description\":\"Create, modify, and delete nodes, scripts, signals, and scenes (mutating + destructive).\",\"tool_count\":24,\"min_godot\":\"4.4\"},{\"name\":\"runtime\",\"enabled\":false,\"description\":\"Run the project headless and capture its output/errors.\",\"tool_count\":11,\"min_godot\":null},{\"name\":\"scripts\",\"enabled\":false,\"description\":\"Read, write, and patch GDScript files; check for parse errors.\",\"tool_count\":6,\"min_godot\":null},{\"name\":\"resources_edit\",\"enabled\":false,\"description\":\"Read/create/edit resource (.tres) files and register autoloads.\",\"tool_count\":5,\"min_godot\":null},{\"name\":\"project\",\"enabled\":false,\"description\":\"Explore the filesystem, search files, read/write project settings, resolve UIDs.\",\"tool_count\":7,\"min_godot\":null},{\"name\":\"editor\",\"enabled\":false,\"description\":\"Capture editor screenshots (image content for vision-capable clients).\",\"tool_count\":1,\"min_godot\":null},{\"name\":\"physics\",\"enabled\":false,\"description\":\"Configure physics bodies, collision shapes, layers/masks, and raycasts.\",\"tool_count\":4,\"min_godot\":null},{\"name\":\"animation\",\"enabled\":false,\"description\":\"Author animations (tracks/keyframes) and AnimationTree state machines/blend trees.\",\"tool_count\":8,\"min_godot\":null},{\"name\":\"scene_3d\",\"enabled\":false,\"description\":\"Build 3D scenes: mesh instances, cameras, lights, WorldEnvironment, and GridMap cells.\",\"tool_count\":8,\"min_godot\":\"4.4\"},{\"name\":\"particles\",\"enabled\":false,\"description\":\"Create/configure GPU particle systems: process material, color gradients, and VFX presets.\",\"tool_count\":5,\"min_godot\":null},{\"name\":\"navigation\",\"enabled\":false,\"description\":\"Author navigation: regions, agents, navmesh baking, and navigation layers.\",\"tool_count\":5,\"min_godot\":null},{\"name\":\"audio\",\"enabled\":false,\"description\":\"Set up audio: stream players, audio bus layout, and bus effects.\",\"tool_count\":6,\"min_godot\":null},{\"name\":\"tilemap\",\"enabled\":false,\"description\":\"Edit TileMap/TileMapLayer cells: set, fill rect, get, clear, list layers.\",\"tool_count\":9,\"min_godot\":\"4.4\"},{\"name\":\"theme_ui\",\"enabled\":false,\"description\":\"Create themes and override colors, font sizes, and styleboxes on Control nodes.\",\"tool_count\":5,\"min_godot\":null},{\"name\":\"shader\",\"enabled\":false,\"description\":\"Author shaders: create/read shader files, assign ShaderMaterial, set shader parameters.\",\"tool_count\":6,\"min_godot\":null},{\"name\":\"input_map\",\"enabled\":false,\"description\":\"Edit the project's Input Map actions and events (add/remove/clear).\",\"tool_count\":5,\"min_godot\":\"4.4\"},{\"name\":\"input\",\"enabled\":false,\"description\":\"Drive a running game: synthesize key/mouse/action input and play input sequences (needs a play session + runtime probe).\",\"tool_count\":7,\"min_godot\":null},{\"name\":\"testing\",\"enabled\":false,\"description\":\"Automated play-testing: run scenarios, assert live node state, diff screenshots, and fuzz with random input.\",\"tool_count\":5,\"min_godot\":null},{\"name\":\"profiling\",\"enabled\":false,\"description\":\"Read Godot performance monitors (FPS, draw calls, memory, physics) for the editor or a running game.\",\"tool_count\":2,\"min_godot\":null},{\"name\":\"batch\",\"enabled\":false,\"description\":\"Operate over many nodes/scenes: find by type, batch-set a property, cross-scene edits, and dependency analysis.\",\"tool_count\":4,\"min_godot\":null},{\"name\":\"analysis\",\"enabled\":false,\"description\":\"Static project analysis: unused resources, signal flow, circular script dependencies, and scene-complexity stats.\",\"tool_count\":9,\"min_godot\":null},{\"name\":\"export\",\"enabled\":false,\"description\":\"Drive the export pipeline: list presets, report export info, and run an export (needs export templates).\",\"tool_count\":3,\"min_godot\":null},{\"name\":\"debugger\",\"enabled\":false,\"description\":\"Debugger breakpoint control: set, remove, clear breakpoints and force breaks in a running game (needs a play session).\",\"tool_count\":11,\"min_godot\":null},{\"name\":\"asset_import\",\"enabled\":false,\"description\":\"Import external assets (local files or URLs) into the project and assemble PBR materials from textures.\",\"tool_count\":3,\"min_godot\":null},{\"name\":\"visual_shader\",\"enabled\":false,\"description\":\"Create and edit Visual Shader node graphs: create shaders, add nodes, wire connections, and set node parameters.\",\"tool_count\":6,\"min_godot\":null},{\"name\":\"project_scaffold\",\"enabled\":false,\"description\":\"Generate a project skeleton (directories, settings, autoloads, root scene) for common game types so agents start from a known structure.\",\"tool_count\":1,\"min_godot\":null},{\"name\":\"composite\",\"enabled\":false,\"description\":\"Macro tools that collapse multi-step scene edits into one atomic, single-undo round-trip (compose a node with script/children, batch-create nodes, apply many edits at once). Individual scene_edit tools still work.\",\"tool_count\":4,\"min_godot\":null}],\"prompts\":[\"toolset_discovery\",\"build_scene\",\"play_test\",\"script_edit\",\"debug_scene\",\"troubleshoot\",\"author_resource\",\"export_build\",\"batch_refactor\"],\"resources\":[\"godot://project/info\",\"godot://scene/current\",\"godot://scene/tree\",\"godot://node/selected\",\"godot://scene/tree/{max_depth}\"],\"bridge\":{\"connected\":true,\"url\":\"ws://localhost:9080\",\"godot_version\":\"4.7.2-stable (official)\",\"project_name\":\"MCP Lab Platformer\",\"project_path\":\"/work/game/\",\"addon_version\":\"2026.10.15\",\"addon_commands\":[\"cmd_ping\",\"cmd_get_project_info\",\"cmd_get_addon_info\",\"cmd_server_hello\",\"cmd_toolsets_update\",\"cmd_update_available\",\"cmd_undo\",\"cmd_redo\",\"cmd_list_history\",\"cmd_run_commands\",\"cmd_add_animation_track\",\"cmd_add_state_machine_state\",\"cmd_create_animation\",\"cmd_create_animation_tree\",\"cmd_insert_keyframe\",\"cmd_set_blend_tree_node\",\"cmd_list_animations\",\"cmd_get_animation\",\"cmd_add_audio_bus\",\"cmd_add_audio_bus_effect\",\"cmd_add_audio_player\",\"cmd_get_audio_bus_layout\",\"cmd_remove_audio_bus\",\"cmd_remove_audio_bus_effect\",\"cmd_batch_set_property\",\"cmd_cross_scene_set_property\",\"cmd_find_nodes_by_type\",\"cmd_get_dependencies\",\"cmd_describe_class\",\"cmd_compose_node\",\"cmd_batch_create_nodes\",\"cmd_apply_node_edits\",\"cmd_set_breakpoint\",\"cmd_remove_breakpoint\",\"cmd_clear_breakpoints\",\"cmd_force_break\",\"cmd_get_debug_break_state\",\"cmd_step_into\",\"cmd_step_over\",\"cmd_step_out\",\"cmd_continue_execution\",\"cmd_get_stack_frames\",\"cmd_evaluate_expression\",\"cmd_get_frame_variables\",\"cmd_capture_editor_screenshot\",\"cmd_get_export_info\",\"cmd_list_export_presets\",\"cmd_import_asset\",\"cmd_create_material_from_textures\",\"cmd_get_import_status\",\"cmd_add_input_action\",\"cmd_add_input_event\",\"cmd_clear_input_action_events\",\"cmd_remove_input_action\",\"cmd_get_input_action_events\",\"cmd_get_recording\",\"cmd_record_input\",\"cmd_stop_recording\",\"cmd_add_mesh_library_item\",\"cmd_create_mesh_library\",\"cmd_attach_script\",\"cmd_connect_signal\",\"cmd_create_node\",\"cmd_create_scene\",\"cmd_delete_node\",\"cmd_rename_node\",\"cmd_save_scene\",\"cmd_set_editable_children\",\"cmd_set_node_property\",\"cmd_bake_navigation_mesh\",\"cmd_get_navigation_region\",\"cmd_set_navigation_layers\",\"cmd_setup_navigation_agent\",\"cmd_setup_navigation_region\",\"cmd_add_to_group\",\"cmd_disconnect_signal\",\"cmd_duplicate_node\",\"cmd_list_signal_connections\",\"cmd_move_node\",\"cmd_remove_from_group\",\"cmd_apply_particle_preset\",\"cmd_create_particles\",\"cmd_set_particle_color_gradient\",\"cmd_set_particle_material\",\"cmd_get_particle_material\",\"cmd_add_raycast\",\"cmd_set_physics_layers\",\"cmd_setup_collision\",\"cmd_setup_physics_body\",\"cmd_get_editor_performance\",\"cmd_get_performance_monitors\",\"cmd_get_filesystem_tree\",\"cmd_get_setting\",\"cmd_path_to_uid\",\"cmd_search_files\",\"cmd_set_setting\",\"cmd_uid_to_path\",\"cmd_delete_resource_file\",\"cmd_move_resource_file\",\"cmd_scaffold_project\",\"cmd_create_resource\",\"cmd_read_resource\",\"cmd_register_autoload\",\"cmd_set_resource_property\",\"cmd_unregister_autoload\",\"cmd_find_ui_elements\",\"cmd_get_property_samples\",\"cmd_monitor_property\",\"cmd_read_property\",\"cmd_capture_game_screenshot\",\"cmd_get_game_output\",\"cmd_get_game_scene_tree\",\"cmd_get_input_stats\",\"cmd_is_playing\",\"cmd_play_input_sequence\",\"cmd_play_scene\",\"cmd_simulate_action\",\"cmd_simulate_key\",\"cmd_simulate_mouse\",\"cmd_stop_scene\",\"cmd_add_mesh_instance\",\"cmd_gridmap_set_cell\",\"cmd_gridmap_get_cell\",\"cmd_setup_camera\",\"cmd_setup_environment\",\"cmd_setup_lighting\",\"cmd_get_active_scene\",\"cmd_list_scenes\",\"cmd_get_scene_tree\",\"cmd_get_selected_node\",\"cmd_get_node_properties\",\"cmd_node_exists\",\"cmd_node_persistence\",\"cmd_get_node_property\",\"cmd_get_node_property_list\",\"cmd_get_node_groups\",\"cmd_snapshot_subtree\",\"cmd_close_scene\",\"cmd_extract_scene\",\"cmd_instance_scene\",\"cmd_list_open_scenes\",\"cmd_open_scene\",\"cmd_reload_scene\",\"cmd_rescan_filesystem\",\"cmd_save_all_scenes\",\"cmd_select_nodes\",\"cmd_get_script_for_node\",\"cmd_get_scan_state\",\"cmd_list_scripts\",\"cmd_patch_script\",\"cmd_read_script\",\"cmd_write_script\",\"cmd_assign_shader_material\",\"cmd_create_shader\",\"cmd_get_shader_param\",\"cmd_read_shader\",\"cmd_set_shader_param\",\"cmd_create_theme\",\"cmd_set_theme_color\",\"cmd_set_theme_font_size\",\"cmd_set_theme_stylebox\",\"cmd_get_node_theme_overrides\",\"cmd_tilemap_clear\",\"cmd_tilemap_fill_rect\",\"cmd_tilemap_get_cell\",\"cmd_tilemap_get_used_cells\",\"cmd_tilemap_layers\",\"cmd_tilemap_set_cell\",\"cmd_add_tileset_atlas_source\",\"cmd_create_tile\",\"cmd_create_tileset\",\"cmd_create_visual_shader\",\"cmd_add_shader_node\",\"cmd_connect_shader_nodes\",\"cmd_set_shader_node_param\",\"cmd_list_shader_node_types\",\"cmd_read_visual_shader\"],\"peer_identity\":{\"addon_version\":\"2026.10.15\",\"godot_version\":\"4.7.2-stable (official)\",\"project_path\":\"/work/game/\"},\"backend\":{\"csharp_supported\":false,\"csharp_project\":false,\"csharp_build\":false}},\"active_scene\":null,\"addon_drift_warning\":null,\"version_notice\":null,\"update\":null,\"common_errors\":[{\"symptom\":\"Tool '<name>' is not enabled\",\"cause\":\"The toolset containing that tool is not enabled.\",\"fix\":\"Call godot_list_toolsets, then godot_enable_toolset(\\\"scene_edit\\\") (or the relevant category) before using the tool.\"},{\"symptom\":\"BRIDGE_DISCONNECTED\",\"cause\":\"Godot is not running or the addon is not enabled.\",\"fix\":\"Open Godot with the project and enable the addon in Project Settings.\"},{\"symptom\":\"PRECONDITION_FAILED: required=active_scene\",\"cause\":\"No .tscn scene is open in the editor.\",\"fix\":\"Open a scene file in Godot, or call godot_scene_edit_create_scene(root_type=…, scene_path=…) to make one (enable the scene_edit toolset first).\"},{\"symptom\":\"PRECONDITION_FAILED: required=confirm\",\"cause\":\"Destructive tool (godot_scene_edit_delete_node, godot_scene_edit_reload_scene) needs explicit confirmation.\",\"fix\":\"Add confirm=True to the call, or use dry_run=True to preview first.\"},{\"symptom\":\"PRECONDITION_FAILED: required=play_session\",\"cause\":\"Live runtime/input tools need an active editor play session.\",\"fix\":\"Call play_scene() first, and ensure the runtime probe autoload is registered.\"},{\"symptom\":\"PRECONDITION_FAILED: required=runtime_probe\",\"cause\":\"The game was launched from the editor but lacks the MCPRuntimeProbe autoload.\",\"fix\":\"Register MCPRuntimeProbe as an autoload in Project Settings.\"},{\"symptom\":\"PRECONDITION_FAILED: required=godot_version\",\"cause\":\"The connected Godot editor is older than the toolset's minimum.\",\"fix\":\"Upgrade to Godot 4.4 or newer.\"},{\"symptom\":\"RESOURCE_NOT_FOUND\",\"cause\":\"A node, scene, script, or resource path does not exist.\",\"fix\":\"Verify the path with get_scene_tree() or get_filesystem_tree() first.\"}],\"next_steps\":[\"Bridge is online. Call list_toolsets() then enable_toolset(...) for the work you plan to do.\",\"No scene is open. Open or create a scene before editing nodes.\",\"For live testing, register MCPRuntimeProbe as an autoload, then play_scene().\"]}",
+   "type": "text"
+  }
+ ],
+ "isError": false,
+ "structuredContent": {
+  "server": "godot-mcp",
+  "version": "2026.10.15",
+  "contract_version": 1,
+  "min_compatible_contract": 1,
+  "transport": "stdio",
+  "toolsets": [
+   {
+    "name": "core",
+    "enabled": true,
+    "description": "Always-on diagnostics and toolset management.",
+    "tool_count": 13,
+    "min_godot": null
+   },
+   {
+    "name": "inspection",
+    "enabled": true,
+    "description": "Read-only project, scene, and node inspection.",
+    "tool_count": 11,
+    "min_godot": null
+   },
+   {
+    "name": "scene_edit",
+    "enabled": false,
+    "description": "Create, modify, and delete nodes, scripts, signals, and scenes (mutating + destructive).",
+    "tool_count": 24,
+    "min_godot": "4.4"
+   },
+   {
+    "name": "runtime",
+    "enabled": false,
+    "description": "Run the project headless and capture its output/errors.",
+    "tool_count": 11,
+    "min_godot": null
+   },
+   {
+    "name": "scripts",
+    "enabled": false,
+    "description": "Read, write, and patch GDScript files; check for parse errors.",
+    "tool_count": 6,
+    "min_godot": null
+   },
+   {
+    "name": "resources_edit",
+    "enabled": false,
+    "description": "Read/create/edit resource (.tres) files and register autoloads.",
+    "tool_count": 5,
+    "min_godot": null
+   },
+   {
+    "name": "project",
+    "enabled": false,
+    "description": "Explore the filesystem, search files, read/write project settings, resolve UIDs.",
+    "tool_count": 7,
+    "min_godot": null
+   },
+   {
+    "name": "editor",
+    "enabled": false,
+    "description": "Capture editor screenshots (image content for vision-capable clients).",
+    "tool_count": 1,
+    "min_godot": null
+   },
+   {
+    "name": "physics",
+    "enabled": false,
+    "description": "Configure physics bodies, collision shapes, layers/masks, and raycasts.",
+    "tool_count": 4,
+    "min_godot": null
+   },
+   {
+    "name": "animation",
+    "enabled": false,
+    "description": "Author animations (tracks/keyframes) and AnimationTree state machines/blend trees.",
+    "tool_count": 8,
+    "min_godot": null
+   },
+   {
+    "name": "scene_3d",
+    "enabled": false,
+    "description": "Build 3D scenes: mesh instances, cameras, lights, WorldEnvironment, and GridMap cells.",
+    "tool_count": 8,
+    "min_godot": "4.4"
+   },
+   {
+    "name": "particles",
+    "enabled": false,
+    "description": "Create/configure GPU particle systems: process material, color gradients, and VFX presets.",
+    "tool_count": 5,
+    "min_godot": null
+   },
+   {
+    "name": "navigation",
+    "enabled": false,
+    "description": "Author navigation: regions, agents, navmesh baking, and navigation layers.",
+    "tool_count": 5,
+    "min_godot": null
+   },
+   {
+    "name": "audio",
+    "enabled": false,
+    "description": "Set up audio: stream players, audio bus layout, and bus effects.",
+    "tool_count": 6,
+    "min_godot": null
+   },
+   {
+    "name": "tilemap",
+    "enabled": false,
+    "description": "Edit TileMap/TileMapLayer cells: set, fill rect, get, clear, list layers.",
+    "tool_count": 9,
+    "min_godot": "4.4"
+   },
+   {
+    "name": "theme_ui",
+    "enabled": false,
+    "description": "Create themes and override colors, font sizes, and styleboxes on Control nodes.",
+    "tool_count": 5,
+    "min_godot": null
+   },
+   {
+    "name": "shader",
+    "enabled": false,
+    "description": "Author shaders: create/read shader files, assign ShaderMaterial, set shader parameters.",
+    "tool_count": 6,
+    "min_godot": null
+   },
+   {
+    "name": "input_map",
+    "enabled": false,
+    "description": "Edit the project's Input Map actions and events (add/remove/clear).",
+    "tool_count": 5,
+    "min_godot": "4.4"
+   },
+   {
+    "name": "input",
+    "enabled": false,
+    "description": "Drive a running game: synthesize key/mouse/action input and play input sequences (needs a play session + runtime probe).",
+    "tool_count": 7,
+    "min_godot": null
+   },
+   {
+    "name": "testing",
+    "enabled": false,
+    "description": "Automated play-testing: run scenarios, assert live node state, diff screenshots, and fuzz with random input.",
+    "tool_count": 5,
+    "min_godot": null
+   },
+   {
+    "name": "profiling",
+    "enabled": false,
+    "description": "Read Godot performance monitors (FPS, draw calls, memory, physics) for the editor or a running game.",
+    "tool_count": 2,
+    "min_godot": null
+   },
+   {
+    "name": "batch",
+    "enabled": false,
+    "description": "Operate over many nodes/scenes: find by type, batch-set a property, cross-scene edits, and dependency analysis.",
+    "tool_count": 4,
+    "min_godot": null
+   },
+   {
+    "name": "analysis",
+    "enabled": false,
+    "description": "Static project analysis: unused resources, signal flow, circular script dependencies, and scene-complexity stats.",
+    "tool_count": 9,
+    "min_godot": null
+   },
+   {
+    "name": "export",
+    "enabled": false,
+    "description": "Drive the export pipeline: list presets, report export info, and run an export (needs export templates).",
+    "tool_count": 3,
+    "min_godot": null
+   },
+   {
+    "name": "debugger",
+    "enabled": false,
+    "description": "Debugger breakpoint control: set, remove, clear breakpoints and force breaks in a running game (needs a play session).",
+    "tool_count": 11,
+    "min_godot": null
+   },
+   {
+    "name": "asset_import",
+    "enabled": false,
+    "description": "Import external assets (local files or URLs) into the project and assemble PBR materials from textures.",
+    "tool_count": 3,
+    "min_godot": null
+   },
+   {
+    "name": "visual_shader",
+    "enabled": false,
+    "description": "Create and edit Visual Shader node graphs: create shaders, add nodes, wire connections, and set node parameters.",
+    "tool_count": 6,
+    "min_godot": null
+   },
+   {
+    "name": "project_scaffold",
+    "enabled": false,
+    "description": "Generate a project skeleton (directories, settings, autoloads, root scene) for common game types so agents start from a known structure.",
+    "tool_count": 1,
+    "min_godot": null
+   },
+   {
+    "name": "composite",
+    "enabled": false,
+    "description": "Macro tools that collapse multi-step scene edits into one atomic, single-undo round-trip (compose a node with script/children, batch-create nodes, apply many edits at once). Individual scene_edit tools still work.",
+    "tool_count": 4,
+    "min_godot": null
+   }
+  ],
+  "prompts": [
+   "toolset_discovery",
+   "build_scene",
+   "play_test",
+   "script_edit",
+   "debug_scene",
+   "troubleshoot",
+   "author_resource",
+   "export_build",
+   "batch_refactor"
+  ],
+  "resources": [
+   "godot://project/info",
+   "godot://scene/current",
+   "godot://scene/tree",
+   "godot://node/selected",
+   "godot://scene/tree/{max_depth}"
+  ],
+  "bridge": {
+   "connected": true,
+   "url": "ws://localhost:9080",
+   "godot_version": "4.7.2-stable (official)",
+   "project_name": "MCP Lab Platformer",
+   "project_path": "/work/game/",
+   "addon_version": "2026.10.15",
+   "addon_commands": [
+    "cmd_ping",
+    "cmd_get_project_info",
+    "cmd_get_addon_info",
+    "cmd_server_hello",
+    "cmd_toolsets_update",
+    "cmd_update_available",
+    "cmd_undo",
+    "cmd_redo",
+    "cmd_list_history",
+    "cmd_run_commands",
+    "cmd_add_animation_track",
+    "cmd_add_state_machine_state",
+    "cmd_create_animation",
+    "cmd_create_animation_tree",
+    "cmd_insert_keyframe",
+    "cmd_set_blend_tree_node",
+    "cmd_list_animations",
+    "cmd_get_animation",
+    "cmd_add_audio_bus",
+    "cmd_add_audio_bus_effect",
+    "cmd_add_audio_player",
+    "cmd_get_audio_bus_layout",
+    "cmd_remove_audio_bus",
+    "cmd_remove_audio_bus_effect",
+    "cmd_batch_set_property",
+    "cmd_cross_scene_set_property",
+    "cmd_find_nodes_by_type",
+    "cmd_get_dependencies",
+    "cmd_describe_class",
+    "cmd_compose_node",
+    "cmd_batch_create_nodes",
+    "cmd_apply_node_edits",
+    "cmd_set_breakpoint",
+    "cmd_remove_breakpoint",
+    "cmd_clear_breakpoints",
+    "cmd_force_break",
+    "cmd_get_debug_break_state",
+    "cmd_step_into",
+    "cmd_step_over",
+    "cmd_step_out",
+    "cmd_continue_execution",
+    "cmd_get_stack_frames",
+    "cmd_evaluate_expression",
+    "cmd_get_frame_variables",
+    "cmd_capture_editor_screenshot",
+    "cmd_get_export_info",
+    "cmd_list_export_presets",
+    "cmd_import_asset",
+    "cmd_create_material_from_textures",
+    "cmd_get_import_status",
+    "cmd_add_input_action",
+    "cmd_add_input_event",
+    "cmd_clear_input_action_events",
+    "cmd_remove_input_action",
+    "cmd_get_input_action_events",
+    "cmd_get_recording",
+    "cmd_record_input",
+    "cmd_stop_recording",
+    "cmd_add_mesh_library_item",
+    "cmd_create_mesh_library",
+    "cmd_attach_script",
+    "cmd_connect_signal",
+    "cmd_create_node",
+    "cmd_create_scene",
+    "cmd_delete_node",
+    "cmd_rename_node",
+    "cmd_save_scene",
+    "cmd_set_editable_children",
+    "cmd_set_node_property",
+    "cmd_bake_navigation_mesh",
+    "cmd_get_navigation_region",
+    "cmd_set_navigation_layers",
+    "cmd_setup_navigation_agent",
+    "cmd_setup_navigation_region",
+    "cmd_add_to_group",
+    "cmd_disconnect_signal",
+    "cmd_duplicate_node",
+    "cmd_list_signal_connections",
+    "cmd_move_node",
+    "cmd_remove_from_group",
+    "cmd_apply_particle_preset",
+    "cmd_create_particles",
+    "cmd_set_particle_color_gradient",
+    "cmd_set_particle_material",
+    "cmd_get_particle_material",
+    "cmd_add_raycast",
+    "cmd_set_physics_layers",
+    "cmd_setup_collision",
+    "cmd_setup_physics_body",
+    "cmd_get_editor_performance",
+    "cmd_get_performance_monitors",
+    "cmd_get_filesystem_tree",
+    "cmd_get_setting",
+    "cmd_path_to_uid",
+    "cmd_search_files",
+    "cmd_set_setting",
+    "cmd_uid_to_path",
+    "cmd_delete_resource_file",
+    "cmd_move_resource_file",
+    "cmd_scaffold_project",
+    "cmd_create_resource",
+    "cmd_read_resource",
+    "cmd_register_autoload",
+    "cmd_set_resource_property",
+    "cmd_unregister_autoload",
+    "cmd_find_ui_elements",
+    "cmd_get_property_samples",
+    "cmd_monitor_property",
+    "cmd_read_property",
+    "cmd_capture_game_screenshot",
+    "cmd_get_game_output",
+    "cmd_get_game_scene_tree",
+    "cmd_get_input_stats",
+    "cmd_is_playing",
+    "cmd_play_input_sequence",
+    "cmd_play_scene",
+    "cmd_simulate_action",
+    "cmd_simulate_key",
+    "cmd_simulate_mouse",
+    "cmd_stop_scene",
+    "cmd_add_mesh_instance",
+    "cmd_gridmap_set_cell",
+    "cmd_gridmap_get_cell",
+    "cmd_setup_camera",
+    "cmd_setup_environment",
+    "cmd_setup_lighting",
+    "cmd_get_active_scene",
+    "cmd_list_scenes",
+    "cmd_get_scene_tree",
+    "cmd_get_selected_node",
+    "cmd_get_node_properties",
+    "cmd_node_exists",
+    "cmd_node_persistence",
+    "cmd_get_node_property",
+    "cmd_get_node_property_list",
+    "cmd_get_node_groups",
+    "cmd_snapshot_subtree",
+    "cmd_close_scene",
+    "cmd_extract_scene",
+    "cmd_instance_scene",
+    "cmd_list_open_scenes",
+    "cmd_open_scene",
+    "cmd_reload_scene",
+    "cmd_rescan_filesystem",
+    "cmd_save_all_scenes",
+    "cmd_select_nodes",
+    "cmd_get_script_for_node",
+    "cmd_get_scan_state",
+    "cmd_list_scripts",
+    "cmd_patch_script",
+    "cmd_read_script",
+    "cmd_write_script",
+    "cmd_assign_shader_material",
+    "cmd_create_shader",
+    "cmd_get_shader_param",
+    "cmd_read_shader",
+    "cmd_set_shader_param",
+    "cmd_create_theme",
+    "cmd_set_theme_color",
+    "cmd_set_theme_font_size",
+    "cmd_set_theme_stylebox",
+    "cmd_get_node_theme_overrides",
+    "cmd_tilemap_clear",
+    "cmd_tilemap_fill_rect",
+    "cmd_tilemap_get_cell",
+    "cmd_tilemap_get_used_cells",
+    "cmd_tilemap_layers",
+    "cmd_tilemap_set_cell",
+    "cmd_add_tileset_atlas_source",
+    "cmd_create_tile",
+    "cmd_create_tileset",
+    "cmd_create_visual_shader",
+    "cmd_add_shader_node",
+    "cmd_connect_shader_nodes",
+    "cmd_set_shader_node_param",
+    "cmd_list_shader_node_types",
+    "cmd_read_visual_shader"
+   ],
+   "peer_identity": {
+    "addon_version": "2026.10.15",
+    "godot_version": "4.7.2-stable (official)",
+    "project_path": "/work/game/"
+   },
+   "backend": {
+    "csharp_supported": false,
+    "csharp_project": false,
+    "csharp_build": false
+   }
+  },
+  "active_scene": null,
+  "addon_drift_warning": null,
+  "version_notice": null,
+  "update": null,
+  "common_errors": [
+   {
+    "symptom": "Tool '<name>' is not enabled",
+    "cause": "The toolset containing that tool is not enabled.",
+    "fix": "Call godot_list_toolsets, then godot_enable_toolset(\"scene_edit\") (or the relevant category) before using the tool."
+   },
+   {
+    "symptom": "BRIDGE_DISCONNECTED",
+    "cause": "Godot is not running or the addon is not enabled.",
+    "fix": "Open Godot with the project and enable the addon in Project Settings."
+   },
+   {
+    "symptom": "PRECONDITION_FAILED: required=active_scene",
+    "cause": "No .tscn scene is open in the editor.",
+    "fix": "Open a scene file in Godot, or call godot_scene_edit_create_scene(root_type=…, scene_path=…) to make one (enable the scene_edit toolset first)."
+   },
+   {
+    "symptom": "PRECONDITION_FAILED: required=confirm",
+    "cause": "Destructive tool (godot_scene_edit_delete_node, godot_scene_edit_reload_scene) needs explicit confirmation.",
+    "fix": "Add confirm=True to the call, or use dry_run=True to preview first."
+   },
+   {
+    "symptom": "PRECONDITION_FAILED: required=play_session",
+    "cause": "Live runtime/input tools need an active editor play session.",
+    "fix": "Call play_scene() first, and ensure the runtime probe autoload is registered."
+   },
+   {
+    "symptom": "PRECONDITION_FAILED: required=runtime_probe",
+    "cause": "The game was launched from the editor but lacks the MCPRuntimeProbe autoload.",
+    "fix": "Register MCPRuntimeProbe as an autoload in Project Settings."
+   },
+   {
+    "symptom": "PRECONDITION_FAILED: required=godot_version",
+    "cause": "The connected Godot editor is older than the toolset's minimum.",
+    "fix": "Upgrade to Godot 4.4 or newer."
+   },
+   {
+    "symptom": "RESOURCE_NOT_FOUND",
+    "cause": "A node, scene, script, or resource path does not exist.",
+    "fix": "Verify the path with get_scene_tree() or get_filesystem_tree() first."
+   }
+  ],
+  "next_steps": [
+   "Bridge is online. Call list_toolsets() then enable_toolset(...) for the work you plan to do.",
+   "No scene is open. Open or create a scene before editing nodes.",
+   "For live testing, register MCPRuntimeProbe as an autoload, then play_scene()."
+  ]
+ }
+}

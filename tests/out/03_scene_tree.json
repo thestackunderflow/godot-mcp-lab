@@ -1,0 +1,62 @@
+{
+ "name": "Level",
+ "type": "Node2D",
+ "path": ".",
+ "script": null,
+ "children": [
+  {
+   "name": "Floor",
+   "type": "StaticBody2D",
+   "path": "Floor",
+   "script": null,
+   "children": [
+    {
+     "name": "CollisionShape2D",
+     "type": "CollisionShape2D",
+     "path": "Floor/CollisionShape2D",
+     "script": null,
+     "children": []
+    }
+   ]
+  },
+  {
+   "name": "Ledge",
+   "type": "StaticBody2D",
+   "path": "Ledge",
+   "script": null,
+   "children": [
+    {
+     "name": "CollisionShape2D",
+     "type": "CollisionShape2D",
+     "path": "Ledge/CollisionShape2D",
+     "script": null,
+     "children": []
+    }
+   ]
+  },
+  {
+   "name": "Player",
+   "type": "CharacterBody2D",
+   "path": "Player",
+   "script": "res://scripts/player.gd",
+   "children": [
+    {
+     "name": "Sprite2D",
+     "type": "Sprite2D",
+     "path": "Player/Sprite2D",
+     "script": null,
+     "owner": "res://scenes/player.tscn",
+     "children": []
+    },
+    {
+     "name": "CollisionShape2D",
+     "type": "CollisionShape2D",
+     "path": "Player/CollisionShape2D",
+     "script": null,
+     "owner": "res://scenes/player.tscn",
+     "children": []
+    }
+   ]
+  }
+ ]
+}

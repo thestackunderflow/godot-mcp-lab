@@ -1,0 +1,88 @@
+godot_audio_add_player: Add an audio player (AudioStreamPlayer / AudioStreamPlayer2D /
+AudioStreamPlayer3D) under ``parent_path``. Optionally load ``stream_path``
+(a ``res://`` AudioSt
+godot_editor_capture_screenshot: Capture the Godot editor's main viewport and return it as a PNG image, so
+you can visually inspect the current editor state. Read-only. The capture is
+taken on 
+godot_runtime_run_and_capture: Run the project headless (optionally a specific ``scene`` like
+"res://main.tscn"), wait up to ``timeout_seconds``, then return a summary of
+``errors`` / ``warni
+godot_runtime_play_scene: Run the game from the editor: play ``scene_path`` (a ``res://*.tscn``) or the
+project's main scene when omitted. The game connects to the editor debugger, so
+ru
+godot_runtime_stop_scene: Stop the current editor play session.
+godot_runtime_is_playing: Report whether a play session is running and which scene.
+godot_runtime_get_game_scene_tree: Get the *running* game's live scene tree ({name, type, path, children}).
+Requires an active play session with the godot-mcp runtime probe autoload; if the
+probe
+godot_runtime_capture_game_screenshot: Capture the *running game's* rendered viewport as a PNG image, so you can
+visually verify what the player sees — including shader, lighting, and camera
+output t
+godot_runtime_get_game_output: Read the running game's captured output — ``print()`` lines, script
+errors (with the engine's text), and warnings — as a ring of
+``{seq, kind, text, time_ms}`` 
+godot_runtime_monitor_property: Start watching ``property`` on the running game's node at ``node_path``
+(an absolute path from get_game_scene_tree). The probe captures ``samples``
+readings; co
+godot_runtime_get_property_samples: Return the time series captured by the most recent ``monitor_property``:
+``samples`` is ``[{frame, value}]`` (``ready=false`` until the capture completes;
+``err
+godot_runtime_read_property: Read a property from the running game's node at ``node_path`` ONCE and
+return its current value (JSON-coerced, same shapes ``monitor_property``
+samples use). Th
+godot_runtime_find_ui_elements: Locate live UI (Control) nodes in the running game, each with its path, class,
+visibility, global ``rect`` (use it with ``simulate_mouse`` to click), and ``text
+godot_input_simulate_key: Send a key event to the running game. ``key`` is a Godot key name
+("A", "Space", "Enter", "Escape", …); ``pressed`` false sends a release. Optional
+modifier fla
+godot_input_simulate_mouse: Send a mouse event at viewport position (``x``, ``y``). With ``button`` empty,
+sends motion (with optional ``relative_x``/``relative_y``); with ``button`` =
+lef
+godot_input_simulate_action: Press or release an input-map action (e.g. "ui_accept", "jump") on the running
+game. ``strength`` (0..1) applies to a press. The action must exist in the
+projec
+godot_input_play_sequence: Play a sequence of input events in order, ``delay_ms`` apart. Each event is a
+dict with ``type`` = "key" | "mouse" | "action" and that type's fields (as for
+the
+godot_input_get_stats: Report how many synthesized input events the running game has acknowledged —
+use it to confirm injected input is reaching the game.
+godot_input_record: Start recording the input the running game receives (key + mouse button;
+mouse motion only when ``include_motion``). Stop and collect it with
+``stop_recording``
+godot_input_stop_recording: Stop recording and return the captured ``events`` (in the
+``play_input_sequence`` format). Polls the addon up to ``timeout_ms`` for the
+buffered sequence.
+
+``ru
+godot_input_map_add_action: Add a new input action to the project Input Map.
+
+The action is persisted in ProjectSettings and saved to project.godot.
+Events for this action are added separa
+godot_input_map_remove_action: Remove an input action (and all its events) from the project Input Map.
+
+Destructive: requires ``confirm=True``.
+godot_input_map_add_event: Add an input event to an existing input action.
+
+``event_type`` is one of ``key``, ``mouse``, ``joypad_button``, ``joypad_motion``.
+For ``key``: set ``keycode``
+godot_input_map_clear_action_events: Remove all events from an input action, leaving the action itself intact.
+
+Destructive: requires ``confirm=True``.
+godot_input_map_get_action_events: Read an input action's ``deadzone`` and full event list. Each event is a dict
+in the same shape ``add_input_event`` accepts (``event_type`` plus its
+kind-specif
+godot_testing_run_tests: Run the project's GDScript test suite (GUT) headlessly and return a
+structured result: ``passed``/``failed``/``total``, per-failure detail, and
+the raw summary.
+godot_testing_assert_node_state: Assert that a *running* game node's ``property`` satisfies ``op`` vs ``expected``
+(==, !=, <, <=, >, >=, contains, approx). Reads the live value via the runtime
+godot_testing_run_test_scenario: Run a play-test: play ``scene`` (or the main scene), wait ``setup_ms`` for the
+probe, play the ``events`` input sequence, wait ``settle_ms``, then evaluate each
+godot_testing_run_stress_test: Fuzz the *running* game with ``iterations`` random input events drawn from
+``actions`` (key names / input-map actions / "click"; a sensible default pool if
+omit
+godot_testing_compare_screenshots: Visually diff two base64 PNG screenshots (e.g. from ``capture_editor_screenshot``
+or saved baselines). ``tolerance`` (0..1) is the per-channel difference a pixe
+godot_composite_run_commands: Execute a sequence of bridge commands in ONE round-trip (one editor
+frame; the editor drains serially, so batching N independent commands is the
+main throughput

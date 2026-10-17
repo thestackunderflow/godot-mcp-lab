@@ -1,0 +1,673 @@
+[
+ {
+  "tool": "godot_enable_toolset",
+  "args": {
+   "category": "runtime"
+  },
+  "isError": false,
+  "text": "{\"name\":\"runtime\",\"enabled\":true,\"description\":\"Run the project headless and capture its output/errors.\",\"min_godot\":null,\"tools\":[{\"name\":\"godot_runtime_run_and_capture\",\"description\":\"Run the project headless (optionally a specific ``scene`` like\\n\\\"res://main.tscn\\\"), wait up to ``timeout_seconds``, then return a summary of\\n``errors`` / ``warnings`` / ``output`` and the exit code. Use this to verify\\na change actually runs and to read back failures.\\n\\nWHEN TO USE: You need to verify a scene runs without an editor open\\n(CI, automation, smoke test) or you want the full stdout/stderr log.\\nWHEN NOT TO USE: You need to simulate input or inspect live state —\\nuse play_scene() + get_game_scene_tree() / simulate_key() instead.\",\"input_schema\":{\"type\":\"object\",\"properties\":{\"scene\":{\"anyOf\":[{\"type\":\"string\"},{\"type\":\"null\"}],\"default\":null},\"timeout_seconds\":{\"default\":10.0,\"maximum\":3600.0,\"minimum\":0.1,\"type\":\"number\"}},\"required\":[],\"additionalProperties\":false}},{\"name\":\"godot_runtime_play_scene\",\"description\":\"Run the game from the editor: play ``scene_path`` (a ``res://*.tscn``) or the\\nproject's main scene when omitted. The game connects to the editor debugger, so\\nruntime inspection/input tools can reach it.\\n\\nWHEN TO USE: You need to interact with the running game (simulate input,\\ninspect live nodes, debug, test assertions).\\nWHEN NOT TO USE: Headless CI/automation without an editor — use\\nrun_and_capture() instead. That runs Godot in a subprocess and returns\\nlogs ",
+  "structured": {
+   "name": "runtime",
+   "enabled": true,
+   "description": "Run the project headless and capture its output/errors.",
+   "min_godot": null,
+   "tools": [
+    {
+     "name": "godot_runtime_run_and_capture",
+     "description": "Run the project headless (optionally a specific ``scene`` like\n\"res://main.tscn\"), wait up to ``timeout_seconds``, then return a summary of\n``errors`` / ``warnings`` / ``output`` and the exit code. Use this to verify\na change actually runs and to read back failures.\n\nWHEN TO USE: You need to verify a scene runs without an editor open\n(CI, automation, smoke test) or you want the full stdout/stderr log.\nWHEN NOT TO USE: You need to simulate input or inspect live state —\nuse play_scene() + get_game_scene_tree() / simulate_key() instead.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "scene": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null
+       },
+       "timeout_seconds": {
+        "default": 10.0,
+        "maximum": 3600.0,
+        "minimum": 0.1,
+        "type": "number"
+       }
+      },
+      "required": [],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_runtime_play_scene",
+     "description": "Run the game from the editor: play ``scene_path`` (a ``res://*.tscn``) or the\nproject's main scene when omitted. The game connects to the editor debugger, so\nruntime inspection/input tools can reach it.\n\nWHEN TO USE: You need to interact with the running game (simulate input,\ninspect live nodes, debug, test assertions).\nWHEN NOT TO USE: Headless CI/automation without an editor — use\nrun_and_capture() instead. That runs Godot in a subprocess and returns\nlogs without an editor session.\n\nIF THIS FAILS with \"scene not found\":\n  -> The scene_path is wrong. Use get_project_info() to find the main scene,\n     or get_scene_tree() to see available scenes.\nIF THIS FAILS with \"editor not connected\":\n  -> The Godot editor is not running or the addon is disabled. Check\n     get_server_info() for bridge state and follow the troubleshoot prompt.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "scene_path": {
+        "default": "",
+        "type": "string"
+       }
+      },
+      "required": [],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_runtime_stop_scene",
+     "description": "Stop the current editor play session.",
+     "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_runtime_is_playing",
+     "description": "Report whether a play session is running and which scene.",
+     "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_runtime_get_game_scene_tree",
+     "description": "Get the *running* game's live scene tree ({name, type, path, children}).\nRequires an active play session with the godot-mcp runtime probe autoload; if the\nprobe isn't connected, returns ``connected=false`` with a ``hint`` to add it.\n\nWHEN TO USE: You need to inspect node hierarchy, positions, or state while\nthe game is actively running (e.g., after simulating input to verify movement).\nWHEN NOT TO USE: The editor is idle with no play session — use\nget_scene_tree() to read the static scene structure instead.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "timeout_ms": {
+        "default": 2000,
+        "maximum": 600000,
+        "minimum": 1,
+        "type": "integer"
+       }
+      },
+      "required": [],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_runtime_capture_game_screenshot",
+     "description": "Capture the *running game's* rendered viewport as a PNG image, so you can\nvisually verify what the player sees — including shader, lighting, and camera\noutput the editor viewport cannot show (the game is a separate process; the\nprobe grabs the frame in-process). Read-only. Requires an active play session\nwith the runtime probe autoload.\n\nIF THIS FAILS with \"No play session\":\n  -> Call play_scene(scene_path) first.\nIF THIS FAILS with \"probe is not connected\":\n  -> Register MCPRuntimeProbe as an autoload in the game (get_project_info()\n     to check), then play_scene again.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "timeout_ms": {
+        "default": 2000,
+        "maximum": 600000,
+        "minimum": 1,
+        "type": "integer"
+       }
+      },
+      "required": [],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_runtime_get_game_output",
+     "description": "Read the running game's captured output — ``print()`` lines, script\nerrors (with the engine's text), and warnings — as a ring of\n``{seq, kind, text, time_ms}`` entries (issue #534).\n\nUse it during a play-test to read crash traces and log-based\nassertions: the capture keeps working while the game is frozen at a\ndebugger break (that is exactly when crash traces are readable).\n``since_seq`` is an incremental cursor — pass the ``next_seq`` from\nyour previous call to fetch only newer entries. The ring is bounded\n(500); ``dropped`` counts evicted entries honestly, so never assume\nthe ring holds the whole session.\n\nIF THIS FAILS with \"No play session\":\n  -> Call play_scene(scene_path) first.\nIF THIS FAILS with \"probe is not connected\":\n  -> Register MCPRuntimeProbe as an autoload in the game, then\n     play_scene again.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "since_seq": {
+        "default": 0,
+        "type": "integer"
+       }
+      },
+      "required": [],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_runtime_monitor_property",
+     "description": "Start watching ``property`` on the running game's node at ``node_path``\n(an absolute path from get_game_scene_tree). The probe captures ``samples``\nreadings; collect them with get_property_samples. ``on_change_only`` (default)\nqueues a sample only when the value changed (float ``epsilon``-tolerant, also\ninside Vector2/3), so a static property yields fewer deduped entries.\n\n``runtime``: starting the monitor is a side effect on the play session.\nRequires a play session + runtime probe; for a single current value use\nread_property instead.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "node_path": {
+        "type": "string"
+       },
+       "property": {
+        "type": "string"
+       },
+       "samples": {
+        "default": 30,
+        "maximum": 1000,
+        "minimum": 1,
+        "type": "integer"
+       },
+       "on_change_only": {
+        "default": true,
+        "type": "boolean"
+       },
+       "epsilon": {
+        "default": 0.0001,
+        "type": "number"
+       }
+      },
+      "required": [
+       "node_path",
+       "property"
+      ],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_runtime_get_property_samples",
+     "description": "Return the time series captured by the most recent ``monitor_property``:\n``samples`` is ``[{frame, value}]`` (``ready=false`` until the capture completes;\n``error`` set if the node/property was invalid).",
+     "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_runtime_read_property",
+     "description": "Read a property from the running game's node at ``node_path`` ONCE and\nreturn its current value (JSON-coerced, same shapes ``monitor_property``\nsamples use). The dedicated #571 one-shot path: it never touches the\n``monitor_property`` capture slot, so an assert or read during a running\ncapture cannot replace that capture's series. Requires a play session +\nruntime probe.\n\nWHEN TO USE: a single current-value check (assertions, \"what is X now?\").\nWHEN NOT TO USE: you want a series over time — use ``monitor_property`` +\n``get_property_samples``.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "node_path": {
+        "type": "string"
+       },
+       "property": {
+        "type": "string"
+       },
+       "timeout_ms": {
+        "default": 2000,
+        "maximum": 600000,
+        "minimum": 1,
+        "type": "integer"
+       }
+      },
+      "required": [
+       "node_path",
+       "property"
+      ],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_runtime_find_ui_elements",
+     "description": "Locate live UI (Control) nodes in the running game, each with its path, class,\nvisibility, global ``rect`` (use it with ``simulate_mouse`` to click), and ``text``\nif any. Filter by ``name_contains`` / ``class_filter`` (e.g. \"Button\") /\n``visible_only``. Requires a play session + runtime probe.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "name_contains": {
+        "default": "",
+        "type": "string"
+       },
+       "class_filter": {
+        "default": "",
+        "type": "string"
+       },
+       "visible_only": {
+        "default": false,
+        "type": "boolean"
+       },
+       "timeout_ms": {
+        "default": 2000,
+        "maximum": 600000,
+        "minimum": 1,
+        "type": "integer"
+       }
+      },
+      "required": [],
+      "additionalProperties": false
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "godot_enable_toolset",
+  "args": {
+   "category": "input"
+  },
+  "isError": false,
+  "text": "{\"name\":\"input\",\"enabled\":true,\"description\":\"Drive a running game: synthesize key/mouse/action input and play input sequences (needs a play session + runtime probe).\",\"min_godot\":null,\"tools\":[{\"name\":\"godot_input_simulate_key\",\"description\":\"Send a key event to the running game. ``key`` is a Godot key name\\n(\\\"A\\\", \\\"Space\\\", \\\"Enter\\\", \\\"Escape\\\", …); ``pressed`` false sends a release. Optional\\nmodifier flags (shift/ctrl/alt/meta). Requires a play session + runtime probe.\\nThe injected event carries both keycode and physical_keycode (like real\\nhardware), so Input Map actions bound either way fire.\\n\\nWHEN TO USE: You need to send a SINGLE key press or release (e.g., tap\\nSpace to jump, or hold Shift for sprint). Simple, one-off interactions.\\nWHEN NOT TO USE: You need a timed sequence of many inputs — use\\nplay_input_sequence(events=[...], delay_ms=...) instead. That replays a\\nwhole macro with configurable delays between events.\\n\\nIF THIS FAILS with \\\"No play session\\\":\\n  → Call play_scene(scene_path) first, then retry.\\nIF THIS FAILS with \\\"probe not connected\\\":\\n  → Register MCPRuntimeProbe as autoload (get_project_info() to check).\",\"input_schema\":{\"type\":\"object\",\"properties\":{\"key\":{\"type\":\"string\"},\"pressed\":{\"default\":true,\"type\":\"boolean\"},\"shift\":{\"default\":false,\"type\":\"boolean\"},\"ctrl\":{\"default\":false,\"type\":\"boolean\"},\"alt\":{\"default\":false,\"type\":\"boolean\"},\"meta\":{\"default\":false,\"type\":\"boolean\"}},\"required\":[\"key\"],\"additionalProperties\":false}},{\"na",
+  "structured": {
+   "name": "input",
+   "enabled": true,
+   "description": "Drive a running game: synthesize key/mouse/action input and play input sequences (needs a play session + runtime probe).",
+   "min_godot": null,
+   "tools": [
+    {
+     "name": "godot_input_simulate_key",
+     "description": "Send a key event to the running game. ``key`` is a Godot key name\n(\"A\", \"Space\", \"Enter\", \"Escape\", …); ``pressed`` false sends a release. Optional\nmodifier flags (shift/ctrl/alt/meta). Requires a play session + runtime probe.\nThe injected event carries both keycode and physical_keycode (like real\nhardware), so Input Map actions bound either way fire.\n\nWHEN TO USE: You need to send a SINGLE key press or release (e.g., tap\nSpace to jump, or hold Shift for sprint). Simple, one-off interactions.\nWHEN NOT TO USE: You need a timed sequence of many inputs — use\nplay_input_sequence(events=[...], delay_ms=...) instead. That replays a\nwhole macro with configurable delays between events.\n\nIF THIS FAILS with \"No play session\":\n  → Call play_scene(scene_path) first, then retry.\nIF THIS FAILS with \"probe not connected\":\n  → Register MCPRuntimeProbe as autoload (get_project_info() to check).",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "key": {
+        "type": "string"
+       },
+       "pressed": {
+        "default": true,
+        "type": "boolean"
+       },
+       "shift": {
+        "default": false,
+        "type": "boolean"
+       },
+       "ctrl": {
+        "default": false,
+        "type": "boolean"
+       },
+       "alt": {
+        "default": false,
+        "type": "boolean"
+       },
+       "meta": {
+        "default": false,
+        "type": "boolean"
+       }
+      },
+      "required": [
+       "key"
+      ],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_input_simulate_mouse",
+     "description": "Send a mouse event at viewport position (``x``, ``y``). With ``button`` empty,\nsends motion (with optional ``relative_x``/``relative_y``); with ``button`` =\nleft/right/middle/wheel_up/wheel_down, sends a button press/release (``pressed``).\n\nIF THIS FAILS with \"No play session\":\n  → Call play_scene(scene_path) first, then retry.\nIF THIS FAILS with \"probe not connected\":\n  → Register MCPRuntimeProbe as autoload (get_project_info() to check).",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "x": {
+        "type": "number"
+       },
+       "y": {
+        "type": "number"
+       },
+       "button": {
+        "default": "",
+        "type": "string"
+       },
+       "pressed": {
+        "default": true,
+        "type": "boolean"
+       },
+       "relative_x": {
+        "default": 0.0,
+        "type": "number"
+       },
+       "relative_y": {
+        "default": 0.0,
+        "type": "number"
+       }
+      },
+      "required": [
+       "x",
+       "y"
+      ],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_input_simulate_action",
+     "description": "Press or release an input-map action (e.g. \"ui_accept\", \"jump\") on the running\ngame. ``strength`` (0..1) applies to a press. The action must exist in the\nproject's Input Map.\n\nIF THIS FAILS with \"No play session\":\n  → Call play_scene(scene_path) first, then retry.\nIF THIS FAILS with \"probe not connected\":\n  → Register MCPRuntimeProbe as autoload (get_project_info() to check).\nIF THIS FAILS with \"unknown action\":\n  → The action is not in the project's Input Map. Add it via\n    ProjectSettings → InputMap or use simulate_key() with the raw key name.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "action": {
+        "type": "string"
+       },
+       "pressed": {
+        "default": true,
+        "type": "boolean"
+       },
+       "strength": {
+        "default": 1.0,
+        "type": "number"
+       }
+      },
+      "required": [
+       "action"
+      ],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_input_play_sequence",
+     "description": "Play a sequence of input events in order, ``delay_ms`` apart. Each event is a\ndict with ``type`` = \"key\" | \"mouse\" | \"action\" and that type's fields (as for\nthe simulate_* tools, e.g. ``{\"type\":\"key\",\"key\":\"Space\",\"pressed\":true}``).\n\nWHEN TO USE: You need to replay a recorded or scripted sequence of many\ninputs (e.g., a combo move, a login macro, a stress test). Events are\nreplayed with a fixed delay between each.\nWHEN NOT TO USE: You only need a single key press — use simulate_key()\nfor simplicity. Or you need real-time interactive control — simulate_*\ngives per-event control, while this replays a pre-built list.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "events": {
+        "items": {
+         "additionalProperties": true,
+         "type": "object"
+        },
+        "type": "array"
+       },
+       "delay_ms": {
+        "default": 0,
+        "maximum": 600000,
+        "minimum": 0,
+        "type": "integer"
+       }
+      },
+      "required": [
+       "events"
+      ],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_input_get_stats",
+     "description": "Report how many synthesized input events the running game has acknowledged —\nuse it to confirm injected input is reaching the game.",
+     "input_schema": {
+      "type": "object",
+      "properties": {},
+      "required": [],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_input_record",
+     "description": "Start recording the input the running game receives (key + mouse button;\nmouse motion only when ``include_motion``). Stop and collect it with\n``stop_recording``; the result feeds straight back into ``play_input_sequence``.",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "include_motion": {
+        "default": false,
+        "type": "boolean"
+       }
+      },
+      "required": [],
+      "additionalProperties": false
+     }
+    },
+    {
+     "name": "godot_input_stop_recording",
+     "description": "Stop recording and return the captured ``events`` (in the\n``play_input_sequence`` format). Polls the addon up to ``timeout_ms`` for the\nbuffered sequence.\n\n``runtime`` (not read-only): it stops an active recording — a side effect on\nthe play session (issue #638).",
+     "input_schema": {
+      "type": "object",
+      "properties": {
+       "timeout_ms": {
+        "default": 2000,
+        "maximum": 600000,
+        "minimum": 1,
+        "type": "integer"
+       }
+      },
+      "required": [],
+      "additionalProperties": false
+     }
+    }
+   ]
+  }
+ },
+ {
+  "tool": "godot_runtime_run_and_capture",
+  "args": {
+   "timeout_seconds": 3
+  },
+  "isError": false,
+  "text": "{\"ran\":true,\"exit_code\":null,\"timed_out\":true,\"duration_seconds\":3.009,\"errors\":[],\"warnings\":[],\"output\":[],\"command\":[\"/opt/godot/godot\",\"--headless\",\"--path\",\"/work/game/\"]}",
+  "structured": {
+   "ran": true,
+   "exit_code": null,
+   "timed_out": true,
+   "duration_seconds": 3.009,
+   "errors": [],
+   "warnings": [],
+   "output": [],
+   "command": [
+    "/opt/godot/godot",
+    "--headless",
+    "--path",
+    "/work/game/"
+   ]
+  }
+ },
+ {
+  "tool": "godot_runtime_play_scene",
+  "args": {},
+  "isError": false,
+  "text": "{\"playing\":true,\"scene\":\"res://scenes/level.tscn\",\"paused\":false}",
+  "structured": {
+   "playing": true,
+   "scene": "res://scenes/level.tscn",
+   "paused": false
+  }
+ },
+ {
+  "tool": "godot_runtime_is_playing",
+  "args": {},
+  "isError": false,
+  "text": "{\"playing\":true,\"scene\":\"res://scenes/level.tscn\",\"paused\":false}",
+  "structured": {
+   "playing": true,
+   "scene": "res://scenes/level.tscn",
+   "paused": false
+  }
+ },
+ {
+  "tool": "godot_runtime_get_game_scene_tree",
+  "args": {},
+  "isError": false,
+  "text": "{\"playing\":true,\"connected\":true,\"tree\":{\"name\":\"root\",\"type\":\"Window\",\"path\":\"/root\",\"children\":[{\"name\":\"McpRuntimeProbe\",\"type\":\"Node\",\"path\":\"/root/McpRuntimeProbe\",\"children\":[]},{\"name\":\"Level\",\"type\":\"Node2D\",\"path\":\"/root/Level\",\"children\":[{\"name\":\"Floor\",\"type\":\"StaticBody2D\",\"path\":\"/root/Level/Floor\",\"children\":[{\"name\":\"CollisionShape2D\",\"type\":\"CollisionShape2D\",\"path\":\"/root/Level/Floor/CollisionShape2D\",\"children\":[]}]},{\"name\":\"Ledge\",\"type\":\"StaticBody2D\",\"path\":\"/root/Level/Ledge\",\"children\":[{\"name\":\"CollisionShape2D\",\"type\":\"CollisionShape2D\",\"path\":\"/root/Level/Ledge/CollisionShape2D\",\"children\":[]}]},{\"name\":\"Player\",\"type\":\"CharacterBody2D\",\"path\":\"/root/Level/Player\",\"children\":[{\"name\":\"Sprite2D\",\"type\":\"Sprite2D\",\"path\":\"/root/Level/Player/Sprite2D\",\"children\":[]},{\"name\":\"CollisionShape2D\",\"type\":\"CollisionShape2D\",\"path\":\"/root/Level/Player/CollisionShape2D\",\"children\":[]}]}]}]},\"ready\":true,\"reason\":\"\",\"hint\":\"\"}",
+  "structured": {
+   "playing": true,
+   "connected": true,
+   "tree": {
+    "name": "root",
+    "type": "Window",
+    "path": "/root",
+    "children": [
+     {
+      "name": "McpRuntimeProbe",
+      "type": "Node",
+      "path": "/root/McpRuntimeProbe",
+      "children": []
+     },
+     {
+      "name": "Level",
+      "type": "Node2D",
+      "path": "/root/Level",
+      "children": [
+       {
+        "name": "Floor",
+        "type": "StaticBody2D",
+        "path": "/root/Level/Floor",
+        "children": [
+         {
+          "name": "CollisionShape2D",
+          "type": "CollisionShape2D",
+          "path": "/root/Level/Floor/CollisionShape2D",
+          "children": []
+         }
+        ]
+       },
+       {
+        "name": "Ledge",
+        "type": "StaticBody2D",
+        "path": "/root/Level/Ledge",
+        "children": [
+         {
+          "name": "CollisionShape2D",
+          "type": "CollisionShape2D",
+          "path": "/root/Level/Ledge/CollisionShape2D",
+          "children": []
+         }
+        ]
+       },
+       {
+        "name": "Player",
+        "type": "CharacterBody2D",
+        "path": "/root/Level/Player",
+        "children": [
+         {
+          "name": "Sprite2D",
+          "type": "Sprite2D",
+          "path": "/root/Level/Player/Sprite2D",
+          "children": []
+         },
+         {
+          "name": "CollisionShape2D",
+          "type": "CollisionShape2D",
+          "path": "/root/Level/Player/CollisionShape2D",
+          "children": []
+         }
+        ]
+       }
+      ]
+     }
+    ]
+   },
+   "ready": true,
+   "reason": "",
+   "hint": ""
+  }
+ },
+ {
+  "tool": "godot_runtime_read_property",
+  "args": {
+   "node_path": "/root/Level/Player",
+   "property": "position"
+  },
+  "isError": false,
+  "text": "{\"ready\":true,\"node_path\":\"/root/Level/Player\",\"property\":\"position\",\"value\":{\"x\":300.0,\"y\":427.988006591797},\"error\":\"\",\"reason\":null}",
+  "structured": {
+   "ready": true,
+   "node_path": "/root/Level/Player",
+   "property": "position",
+   "value": {
+    "x": 300.0,
+    "y": 427.988006591797
+   },
+   "error": "",
+   "reason": null
+  }
+ },
+ {
+  "tool": "godot_runtime_monitor_property",
+  "args": {
+   "node_path": "/root/Level/Player",
+   "property": "position",
+   "samples": 40
+  },
+  "isError": false,
+  "text": "{\"monitoring\":true,\"node_path\":\"/root/Level/Player\",\"property\":\"position\",\"samples\":40,\"on_change_only\":true,\"epsilon\":0.0001}",
+  "structured": {
+   "monitoring": true,
+   "node_path": "/root/Level/Player",
+   "property": "position",
+   "samples": 40,
+   "on_change_only": true,
+   "epsilon": 0.0001
+  }
+ },
+ {
+  "tool": "godot_input_simulate_action",
+  "args": {
+   "action": "jump",
+   "pressed": true
+  },
+  "isError": false,
+  "text": "{\"sent\":true,\"kind\":\"action\",\"count\":1}",
+  "structured": {
+   "sent": true,
+   "kind": "action",
+   "count": 1
+  }
+ },
+ {
+  "tool": "godot_input_simulate_action",
+  "args": {
+   "action": "jump",
+   "pressed": false
+  },
+  "isError": false,
+  "text": "{\"sent\":true,\"kind\":\"action\",\"count\":1}",
+  "structured": {
+   "sent": true,
+   "kind": "action",
+   "count": 1
+  }
+ },
+ {
+  "tool": "godot_runtime_get_property_samples",
+  "args": {},
+  "isError": false,
+  "text": "{\"ready\":true,\"connected\":true,\"node_path\":\"/root/Level/Player\",\"property\":\"position\",\"samples\":[{\"frame\":2115,\"value\":{\"x\":300.0,\"y\":427.988006591797}},{\"frame\":2146,\"value\":{\"x\":300.0,\"y\":420.925079345703}}],\"error\":\"\",\"reason\":null}",
+  "structured": {
+   "ready": true,
+   "connected": true,
+   "node_path": "/root/Level/Player",
+   "property": "position",
+   "samples": [
+    {
+     "frame": 2115,
+     "value": {
+      "x": 300.0,
+      "y": 427.988006591797
+     }
+    },
+    {
+     "frame": 2146,
+     "value": {
+      "x": 300.0,
+      "y": 420.925079345703
+     }
+    }
+   ],
+   "error": "",
+   "reason": null
+  }
+ },
+ {
+  "tool": "godot_input_get_stats",
+  "args": {},
+  "isError": false,
+  "text": "{\"playing\":true,\"connected\":true,\"injected\":2}",
+  "structured": {
+   "playing": true,
+   "connected": true,
+   "injected": 2
+  }
+ },
+ {
+  "tool": "godot_runtime_get_game_output",
+  "args": {},
+  "isError": false,
+  "text": "{\"playing\":true,\"connected\":true,\"entries\":[],\"next_seq\":0,\"total\":0,\"dropped\":0,\"ready\":false,\"reason\":\"output_pending\"}",
+  "structured": {
+   "playing": true,
+   "connected": true,
+   "entries": [],
+   "next_seq": 0,
+   "total": 0,
+   "dropped": 0,
+   "ready": false,
+   "reason": "output_pending"
+  }
+ },
+ {
+  "tool": "godot_runtime_capture_game_screenshot",
+  "args": {},
+  "isError": false,
+  "text": "",
+  "structured": null
+ },
+ {
+  "tool": "godot_runtime_stop_scene",
+  "args": {},
+  "isError": false,
+  "text": "{\"playing\":false,\"scene\":\"\",\"paused\":false}",
+  "structured": {
+   "playing": false,
+   "scene": "",
+   "paused": false
+  }
+ }
+]

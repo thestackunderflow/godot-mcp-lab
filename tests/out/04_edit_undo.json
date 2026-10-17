@@ -1,0 +1,91 @@
+{
+ "dry_run_reply": {
+  "persisted": true,
+  "reason": null,
+  "hint": null,
+  "node_path": "Hint",
+  "created": false,
+  "dry_run": true
+ },
+ "after_dry_run": [
+  "Floor",
+  "Ledge",
+  "Player"
+ ],
+ "create_reply": {
+  "persisted": true,
+  "reason": null,
+  "hint": null,
+  "node_path": "Hint",
+  "created": true,
+  "dry_run": false
+ },
+ "with_label": [
+  "Floor",
+  "Ledge",
+  "Player",
+  "Hint"
+ ],
+ "label_text": {
+  "node_path": "Hint",
+  "property": "text",
+  "value": "Collect 3 coins",
+  "exists": true
+ },
+ "history": {
+  "version": 3,
+  "has_undo": true,
+  "has_redo": false,
+  "can_redo": false,
+  "current_action": "Set Hint.text",
+  "depth": 2,
+  "recent": [
+   {
+    "name": "Create Hint"
+   },
+   {
+    "name": "Set Hint.text"
+   }
+  ]
+ },
+ "undo": {
+  "dry_run": false,
+  "requested": 2,
+  "undone": 2,
+  "last_action": "Create Hint",
+  "nothing_to_undo": false
+ },
+ "after_undo": [
+  "Floor",
+  "Ledge",
+  "Player"
+ ],
+ "redo": {
+  "dry_run": false,
+  "requested": 2,
+  "redone": 2,
+  "last_action": "Set Hint.text",
+  "nothing_to_redo": false
+ },
+ "after_redo": [
+  "Floor",
+  "Ledge",
+  "Player",
+  "Hint"
+ ],
+ "delete_without_confirm": {
+  "content": [
+   {
+    "text": "PRECONDITION_FAILED: 'delete_node' is destructive and may be irreversible. Pass confirm=true to proceed. [required=confirm]",
+    "type": "text"
+   }
+  ],
+  "isError": true
+ },
+ "after_delete_without_confirm": [
+  "Floor",
+  "Ledge",
+  "Player",
+  "Hint"
+ ]
+}

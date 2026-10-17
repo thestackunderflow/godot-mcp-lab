@@ -1,0 +1,27 @@
+{
+ "wrong_argument_reply": {
+  "content": [
+   {
+    "text": "Error calling tool 'godot_enable_toolset': Got unexpected keyword argument(s): toolset",
+    "type": "text"
+   }
+  ],
+  "isError": true
+ },
+ "enable_toolset_schema": {
+  "properties": {
+   "category": {
+    "type": "string"
+   }
+  },
+  "required": [
+   "category"
+  ],
+  "type": "object",
+  "additionalProperties": false
+ },
+ "enable_toolset_annotations": {
+  "idempotentHint": true,
+  "readOnlyHint": true
+ }
+}

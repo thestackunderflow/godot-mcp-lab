@@ -1,0 +1,83 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Started Project initialization (5 steps)[39m[0m
+[   0% ] [90m[1mfirst_scan_filesystem[22m | Scanning file structure...[39m[0m
+[  16% ] [90m[1mfirst_scan_filesystem[22m | Loading global class names...[39m[0m
+[  33% ] [90m[1mfirst_scan_filesystem[22m | Verifying GDExtensions...[39m[0m
+[  50% ] [90m[1mfirst_scan_filesystem[22m | Creating autoload scripts...[39m[0m
+[  66% ] [90m[1mfirst_scan_filesystem[22m | Initializing plugins...[39m[0m
+[  83% ] [90m[1mfirst_scan_filesystem[22m | Starting file scan...[39m[0m
+[92m[ DONE ][39m [1mfirst_scan_filesystem[22m
+[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | Started Registering global classes... (53 steps)[39m[0m
+[   0% ] [90m[1mupdate_scripts_classes[22m | MCPAnimationHandlers[39m[0m
+[   1% ] [90m[1mupdate_scripts_classes[22m | MCPAudioHandlers[39m[0m
+[   3% ] [90m[1mupdate_scripts_classes[22m | MCPBatchHandlers[39m[0m
+[   5% ] [90m[1mupdate_scripts_classes[22m | MCPClassInfoHandlers[39m[0m
+[   7% ] [90m[1mupdate_scripts_classes[22m | MCPCompositeHandlers[39m[0m
+[   9% ] [90m[1mupdate_scripts_classes[22m | MCPDebuggerHandlers[39m[0m
+[  11% ] [90m[1mupdate_scripts_classes[22m | MCPEditorHandlers[39m[0m
+[  12% ] [90m[1mupdate_scripts_classes[22m | MCPExportHandlers[39m[0m
+[  14% ] [90m[1mupdate_scripts_classes[22m | MCPImportAssetHandlers[39m[0m
+[  16% ] [90m[1mupdate_scripts_classes[22m | MCPInputMapHandlers[39m[0m
+[  18% ] [90m[1mupdate_scripts_classes[22m | MCPInputRecordingHandlers[39m[0m
+[  20% ] [90m[1mupdate_scripts_classes[22m | MCPMeshLibraryHandlers[39m[0m
+[  22% ] [90m[1mupdate_scripts_classes[22m | MCPMutationHandlers[39m[0m
+[  24% ] [90m[1mupdate_scripts_classes[22m | MCPNavigationHandlers[39m[0m
+[  25% ] [90m[1mupdate_scripts_classes[22m | MCPNodeParityHandlers[39m[0m
+[  27% ] [90m[1mupdate_scripts_classes[22m | MCPParticlesHandlers[39m[0m
+[  29% ] [90m[1mupdate_scripts_classes[22m | MCPPhysicsHandlers[39m[0m
+[  31% ] [90m[1mupdate_scripts_classes[22m | MCPProfilingHandlers[39m[0m
+[  33% ] [90m[1mupdate_scripts_classes[22m | MCPProjectFSHandlers[39m[0m
+[  35% ] [90m[1mupdate_scripts_classes[22m | MCPProjectScaffoldHandlers[39m[0m
+[  37% ] [90m[1mupdate_scripts_classes[22m | MCPResourcesHandlers[39m[0m
+[  38% ] [90m[1mupdate_scripts_classes[22m | MCPRuntimeInspectHandlers[39m[0m
+[  40% ] [90m[1mupdate_scripts_classes[22m | MCPRuntimeSessionHandlers[39m[0m
+[  42% ] [90m[1mupdate_scripts_classes[22m | MCPScene3DHandlers[39m[0m
+[  44% ] [90m[1mupdate_scripts_classes[22m | MCPSceneInspectHandlers[39m[0m
+[  46% ] [90m[1mupdate_scripts_classes[22m | MCPSceneSessionHandlers[39m[0m
+[  48% ] [90m[1mupdate_scripts_classes[22m | MCPScriptHandlers[39m[0m
+[  50% ] [90m[1mupdate_scripts_classes[22m | MCPShadersHandlers[39m[0m
+[  51% ] [90m[1mupdate_scripts_classes[22m | MCPThemeUIHandlers[39m[0m
+[  53% ] [90m[1mupdate_scripts_classes[22m | MCPTileMapHandlers[39m[0m
+[  55% ] [90m[1mupdate_scripts_classes[22m | MCPTileSetHandlers[39m[0m
+[  57% ] [90m[1mupdate_scripts_classes[22m | MCPVisualShaderHandlers[39m[0m
+[  59% ] [90m[1mupdate_scripts_classes[22m | MCPAnimationRead[39m[0m
+[  61% ] [90m[1mupdate_scripts_classes[22m | MCPAudioBusCapture[39m[0m
+[  62% ] [90m[1mupdate_scripts_classes[22m | MCPCommandRouter[39m[0m
+[  64% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  66% ] [90m[1mupdate_scripts_classes[22m | MCPInputActionRead[39m[0m
+[  68% ] [90m[1mupdate_scripts_classes[22m | MCPAutoRefresh[39m[0m
+[  70% ] [90m[1mupdate_scripts_classes[22m | MCPBridge[39m[0m
+[  72% ] [90m[1mupdate_scripts_classes[22m | MCPDebugger[39m[0m
+[  74% ] [90m[1mupdate_scripts_classes[22m | MCPStatusDock[39m[0m
+[  75% ] [90m[1mupdate_scripts_classes[22m | MCPFsRemap[39m[0m
+[  77% ] [90m[1mupdate_scripts_classes[22m | MCPGuards[39m[0m
+[  79% ] [90m[1mupdate_scripts_classes[22m | MCPHelpers[39m[0m
+[  81% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  83% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[  85% ] [90m[1mupdate_scripts_classes[22m | MCPStatusIcons[39m[0m
+[  87% ] [90m[1mupdate_scripts_classes[22m | MCPParticleRead[39m[0m
+[  88% ] [90m[1mupdate_scripts_classes[22m | MCPSceneInspect[39m[0m
+[  90% ] [90m[1mupdate_scripts_classes[22m | MCPThemeRead[39m[0m
+[  92% ] [90m[1mupdate_scripts_classes[22m | MCPTypeCoerce[39m[0m
+[  94% ] [90m[1mupdate_scripts_classes[22m | MCPVisualShaderRead[39m[0m
+[  96% ] [90m[1mupdate_scripts_classes[22m | [39m[0m
+[92m[ DONE ][39m [1mupdate_scripts_classes[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (1 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Preparing files to reimport...[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing pre-reimport operations...[39m[0m
+[   0% ] [90m[1mreimport[22m | icon.png[39m[0m
+[  50% ] [90m[1mreimport[22m | Finalizing Asset Import...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mreimport[22m | Started (Re)Importing Assets (1 steps)[39m[0m
+[   0% ] [90m[1mreimport[22m | Executing post-reimport operations...[39m[0m
+[92m[ DONE ][39m [1mreimport[22m
+[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Started Loading editor (5 steps)[39m[0m
+[   0% ] [90m[1mloading_editor_layout[22m | Loading editor layout...[39m[0m
+[  16% ] [90m[1mloading_editor_layout[22m | Loading docks...[39m[0m
+[92m[ DONE ][39m [1mloading_editor_layout[22m
+[0m

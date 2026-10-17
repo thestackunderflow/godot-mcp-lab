@@ -1,0 +1,39 @@
+{
+ "tools_all": 194,
+ "chars_all": 237669,
+ "cumulative_counts": {
+  "core": 35,
+  "inspection": 35,
+  "scene_edit": 59,
+  "runtime": 59,
+  "scripts": 65,
+  "resources_edit": 70,
+  "project": 77,
+  "editor": 78,
+  "physics": 82,
+  "animation": 90,
+  "scene_3d": 98,
+  "particles": 103,
+  "navigation": 108,
+  "audio": 114,
+  "tilemap": 123,
+  "theme_ui": 128,
+  "shader": 134,
+  "input_map": 139,
+  "input": 146,
+  "testing": 151,
+  "profiling": 153,
+  "batch": 157,
+  "analysis": 166,
+  "export": 169,
+  "debugger": 180,
+  "asset_import": 183,
+  "visual_shader": 189,
+  "project_scaffold": 190,
+  "composite": 194
+ },
+ "notifications_seen": 29,
+ "notification_methods": [
+  "notifications/tools/list_changed"
+ ]
+}

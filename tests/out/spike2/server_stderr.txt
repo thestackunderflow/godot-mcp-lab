@@ -1,0 +1,43 @@
+{"level": "INFO", "logger": "mcp_server.main", "message": "starting godot-mcp", "transport": "stdio"}
+{"level": "INFO", "logger": "httpx2", "message": "HTTP Request: GET https://pypi.org/pypi/fastmcp/json \"HTTP/1.1 200 OK\""}
+
+
+╭──────────────────────────────────────────────────────────────────────────────╮
+│                                                                              │
+│                                                                              │
+│                         ▄▀▀ ▄▀█ █▀▀ ▀█▀ █▀▄▀█ █▀▀ █▀█                        │
+│                         █▀  █▀█ ▄▄█  █  █ ▀ █ █▄▄ █▀▀                        │
+│                                                                              │
+│                                                                              │
+│                                                                              │
+│                                FastMCP 4.1.0                                 │
+│                            https://gofastmcp.com                             │
+│                                                                              │
+│                  🖥  Server:      godot-mcp, 4.1.0                            │
+│                  🚀 Deploy free: https://horizon.prefect.io                  │
+│                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────╯
+
+
+{"level": "INFO", "logger": "websockets.server", "message": "server listening on 127.0.0.1:9080"}
+{"level": "INFO", "logger": "mcp_server.bridge", "message": "bridge listening", "host": "127.0.0.1", "port": 9080}
+{"level": "INFO", "logger": "mcp_server.server", "message": "bridge listening for the editor", "url": "ws://localhost:9080"}
+[10/17/26 19:02:45] INFO     Starting MCP server 'godot-mcp'    transport.py:241
+                             with transport 'stdio'                             
+{"level": "INFO", "logger": "websockets.server", "message": "connection open", "websocket": "<websockets.asyncio.server.ServerConnection object at 0x72c58a4d8ef0>"}
+{"level": "INFO", "logger": "mcp_server.bridge", "message": "bridge peer identity", "project_path": "/work/game/"}
+[10/17/26 19:02:51] Error calling tool 'godot_enable_toolset'                   
+                    ╭─────────── Traceback (most recent call last) ────────────╮
+                    │ /usr/local/lib/python3.12/site-packages/fastmcp/server/s │
+                    │ erver.py:1467 in call_tool                               │
+                    │                                                          │
+                    │ /usr/local/lib/python3.12/site-packages/fastmcp/tools/ba │
+                    │ se.py:440 in _run                                        │
+                    │                                                          │
+                    │ /usr/local/lib/python3.12/site-packages/fastmcp/tools/to │
+                    │ ol_transform.py:366 in run                               │
+                    │                                                          │
+                    │ /usr/local/lib/python3.12/site-packages/fastmcp/tools/to │
+                    │ ol_transform.py:741 in _forward                          │
+                    ╰──────────────────────────────────────────────────────────╯
+                    TypeError: Got unexpected keyword argument(s): toolset      

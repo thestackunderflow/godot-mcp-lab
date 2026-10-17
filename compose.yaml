@@ -1,0 +1,10 @@
+services:
+  # Tests 0-8 (pytest). Each session starts run-server.sh: Xvfb + headless Godot editor + godot-editor-mcp.
+  tests:
+    build: .
+    image: godot-mcp-lab:4.7.2
+    init: true
+    volumes:
+      - .:/work
+    working_dir: /work
+    command: ["python3", "-m", "pytest", "-v", "-p", "no:cacheprovider", "-s", "tests/test_lab.py"]

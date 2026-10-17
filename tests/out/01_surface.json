@@ -1,0 +1,12 @@
+{
+ "toolsets": 29,
+ "enabled_by_default": [
+  "core",
+  "inspection"
+ ],
+ "default_tools": 24,
+ "default_chars": 34549,
+ "all_tools": 194,
+ "all_chars": 237669,
+ "list_changed_notifications": 27
+}

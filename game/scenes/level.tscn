@@ -17,10 +17,10 @@ position = Vector2(600, 620)
 shape = SubResource("floor_shape")
 
 [node name="Ledge" type="StaticBody2D" parent="."]
-position = Vector2(300, 460)
+position = Vector2(300, 260)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ledge"]
 shape = SubResource("ledge_shape")
 
 [node name="Player" parent="." instance=ExtResource("1")]
-position = Vector2(300, 420)
+position = Vector2(300, 220)

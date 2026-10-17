@@ -1,6 +1,7 @@
 # Godot MCP lab: Godot 4.7.2 (official Linux build, checked against the release's SHA512-SUMS), the community
 # godot-editor-mcp server (PyPI, pinned) and its editor add-on (GitHub release, pinned). Lab snapshot 17 Oct 2026.
-# Nothing is installed on the host. The editor runs headless inside the container.
+# Nothing is installed on the host. The editor runs headless; the game runs in a virtual display (Xvfb) with
+# software OpenGL (Mesa llvmpipe), so it can open a window and be screenshotted without a GPU.
 FROM python:3.12-slim-bookworm
 ARG GODOT=4.7.2-stable
 ARG GODOT_ZIP=Godot_v4.7.2-stable_linux.x86_64.zip
@@ -8,6 +9,8 @@ ARG MCP_VERSION=2026.10.15
 ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
  && apt-get install -y --no-install-recommends ca-certificates curl unzip libfontconfig1 \
+      xvfb xauth libx11-6 libxcursor1 libxinerama1 libxrandr2 libxi6 libxext6 libxkbcommon0 \
+      libgl1 libgl1-mesa-dri libglx-mesa0 libegl1 procps \
  && rm -rf /var/lib/apt/lists/*
 WORKDIR /tmp/dl
 RUN curl -fsSLO "https://github.com/godotengine/godot/releases/download/${GODOT}/${GODOT_ZIP}" \

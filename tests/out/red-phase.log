@@ -1,0 +1,215 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.15, pytest-9.1.1, pluggy-1.7.0 -- /usr/local/bin/python3
+rootdir: /work
+plugins: platformdirs-4.13.3, anyio-4.15.1
+collecting ... collected 9 items
+
+tests/test_lab.py::TestEditorSession::test_0_versions ERROR
+tests/test_lab.py::TestEditorSession::test_1_gated_surface ERROR
+tests/test_lab.py::TestEditorSession::test_2_strict_schemas ERROR
+tests/test_lab.py::TestEditorSession::test_3_inspect_live_scene ERROR
+tests/test_lab.py::TestEditorSession::test_4_edit_with_undo ERROR
+tests/test_lab.py::TestEditorSession::test_5_script_check ERROR
+tests/test_lab.py::test_6_shipped_game_single_jump FAILED
+tests/test_lab.py::test_7_reference_double_jump FAILED
+tests/test_lab.py::test_8_planted_bug_walk_off_ledge FAILED
+
+==================================== ERRORS ====================================
+_____________ ERROR at setup of TestEditorSession.test_0_versions ______________
+
+    @pytest.fixture(scope="class")
+    def s():
+>       sess = Session("main")
+               ^^^^^^^^^^^^^^^
+
+tests/test_lab.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lab.py:44: in __init__
+    self.m.start()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mcp_client.McpClient object at 0x7f00a86375f0>
+
+    def start(self):
+>       raise McpError("not implemented")
+E       mcp_client.McpError: not implemented
+
+tests/mcp_client.py:12: McpError
+___________ ERROR at setup of TestEditorSession.test_1_gated_surface ___________
+
+    @pytest.fixture(scope="class")
+    def s():
+>       sess = Session("main")
+               ^^^^^^^^^^^^^^^
+
+tests/test_lab.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lab.py:44: in __init__
+    self.m.start()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mcp_client.McpClient object at 0x7f00a86375f0>
+
+    def start(self):
+>       raise McpError("not implemented")
+E       mcp_client.McpError: not implemented
+
+tests/mcp_client.py:12: McpError
+__________ ERROR at setup of TestEditorSession.test_2_strict_schemas ___________
+
+    @pytest.fixture(scope="class")
+    def s():
+>       sess = Session("main")
+               ^^^^^^^^^^^^^^^
+
+tests/test_lab.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lab.py:44: in __init__
+    self.m.start()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mcp_client.McpClient object at 0x7f00a86375f0>
+
+    def start(self):
+>       raise McpError("not implemented")
+E       mcp_client.McpError: not implemented
+
+tests/mcp_client.py:12: McpError
+________ ERROR at setup of TestEditorSession.test_3_inspect_live_scene _________
+
+    @pytest.fixture(scope="class")
+    def s():
+>       sess = Session("main")
+               ^^^^^^^^^^^^^^^
+
+tests/test_lab.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lab.py:44: in __init__
+    self.m.start()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mcp_client.McpClient object at 0x7f00a86375f0>
+
+    def start(self):
+>       raise McpError("not implemented")
+E       mcp_client.McpError: not implemented
+
+tests/mcp_client.py:12: McpError
+__________ ERROR at setup of TestEditorSession.test_4_edit_with_undo ___________
+
+    @pytest.fixture(scope="class")
+    def s():
+>       sess = Session("main")
+               ^^^^^^^^^^^^^^^
+
+tests/test_lab.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lab.py:44: in __init__
+    self.m.start()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mcp_client.McpClient object at 0x7f00a86375f0>
+
+    def start(self):
+>       raise McpError("not implemented")
+E       mcp_client.McpError: not implemented
+
+tests/mcp_client.py:12: McpError
+___________ ERROR at setup of TestEditorSession.test_5_script_check ____________
+
+    @pytest.fixture(scope="class")
+    def s():
+>       sess = Session("main")
+               ^^^^^^^^^^^^^^^
+
+tests/test_lab.py:73: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lab.py:44: in __init__
+    self.m.start()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mcp_client.McpClient object at 0x7f00a86375f0>
+
+    def start(self):
+>       raise McpError("not implemented")
+E       mcp_client.McpError: not implemented
+
+tests/mcp_client.py:12: McpError
+=================================== FAILURES ===================================
+_______________________ test_6_shipped_game_single_jump ________________________
+
+    def test_6_shipped_game_single_jump():
+>       r = jump_test("06_single_jump", None)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lab.py:232: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lab.py:169: in jump_test
+    sess = Session(tag, player)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_lab.py:44: in __init__
+    self.m.start()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mcp_client.McpClient object at 0x7f00a8635760>
+
+    def start(self):
+>       raise McpError("not implemented")
+E       mcp_client.McpError: not implemented
+
+tests/mcp_client.py:12: McpError
+_________________________ test_7_reference_double_jump _________________________
+
+    def test_7_reference_double_jump():
+>       r = jump_test("07_double_jump", "player_double_jump.gd")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lab.py:238: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lab.py:169: in jump_test
+    sess = Session(tag, player)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_lab.py:44: in __init__
+    self.m.start()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mcp_client.McpClient object at 0x7f00a863d280>
+
+    def start(self):
+>       raise McpError("not implemented")
+E       mcp_client.McpError: not implemented
+
+tests/mcp_client.py:12: McpError
+______________________ test_8_planted_bug_walk_off_ledge _______________________
+
+    def test_8_planted_bug_walk_off_ledge():
+>       bug = walk_off_test("08_walk_off_bug", "player_planted_bug.gd")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_lab.py:244: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_lab.py:200: in walk_off_test
+    sess = Session(tag, player)
+           ^^^^^^^^^^^^^^^^^^^^
+tests/test_lab.py:44: in __init__
+    self.m.start()
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+self = <mcp_client.McpClient object at 0x7f00a863f080>
+
+    def start(self):
+>       raise McpError("not implemented")
+E       mcp_client.McpError: not implemented
+
+tests/mcp_client.py:12: McpError
+=========================== short test summary info ============================
+FAILED tests/test_lab.py::test_6_shipped_game_single_jump - mcp_client.McpErr...
+FAILED tests/test_lab.py::test_7_reference_double_jump - mcp_client.McpError:...
+FAILED tests/test_lab.py::test_8_planted_bug_walk_off_ledge - mcp_client.McpE...
+ERROR tests/test_lab.py::TestEditorSession::test_0_versions - mcp_client.McpE...
+ERROR tests/test_lab.py::TestEditorSession::test_1_gated_surface - mcp_client...
+ERROR tests/test_lab.py::TestEditorSession::test_2_strict_schemas - mcp_clien...
+ERROR tests/test_lab.py::TestEditorSession::test_3_inspect_live_scene - mcp_c...
+ERROR tests/test_lab.py::TestEditorSession::test_4_edit_with_undo - mcp_clien...
+ERROR tests/test_lab.py::TestEditorSession::test_5_script_check - mcp_client....
+========================= 3 failed, 6 errors in 1.94s ==========================

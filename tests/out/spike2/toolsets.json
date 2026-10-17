@@ -1,0 +1,221 @@
+{
+ "_meta": {
+  "fastmcp": {
+   "wrap_result": true
+  }
+ },
+ "content": [
+  {
+   "text": "[{\"name\":\"core\",\"enabled\":true,\"description\":\"Always-on diagnostics and toolset management.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"inspection\",\"enabled\":true,\"description\":\"Read-only project, scene, and node inspection.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"scene_edit\",\"enabled\":false,\"description\":\"Create, modify, and delete nodes, scripts, signals, and scenes (mutating + destructive).\",\"min_godot\":\"4.4\",\"tools\":[]},{\"name\":\"runtime\",\"enabled\":false,\"description\":\"Run the project headless and capture its output/errors.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"scripts\",\"enabled\":false,\"description\":\"Read, write, and patch GDScript files; check for parse errors.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"resources_edit\",\"enabled\":false,\"description\":\"Read/create/edit resource (.tres) files and register autoloads.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"project\",\"enabled\":false,\"description\":\"Explore the filesystem, search files, read/write project settings, resolve UIDs.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"editor\",\"enabled\":false,\"description\":\"Capture editor screenshots (image content for vision-capable clients).\",\"min_godot\":null,\"tools\":[]},{\"name\":\"physics\",\"enabled\":false,\"description\":\"Configure physics bodies, collision shapes, layers/masks, and raycasts.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"animation\",\"enabled\":false,\"description\":\"Author animations (tracks/keyframes) and AnimationTree state machines/blend trees.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"scene_3d\",\"enabled\":false,\"description\":\"Build 3D scenes: mesh instances, cameras, lights, WorldEnvironment, and GridMap cells.\",\"min_godot\":\"4.4\",\"tools\":[]},{\"name\":\"particles\",\"enabled\":false,\"description\":\"Create/configure GPU particle systems: process material, color gradients, and VFX presets.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"navigation\",\"enabled\":false,\"description\":\"Author navigation: regions, agents, navmesh baking, and navigation layers.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"audio\",\"enabled\":false,\"description\":\"Set up audio: stream players, audio bus layout, and bus effects.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"tilemap\",\"enabled\":false,\"description\":\"Edit TileMap/TileMapLayer cells: set, fill rect, get, clear, list layers.\",\"min_godot\":\"4.4\",\"tools\":[]},{\"name\":\"theme_ui\",\"enabled\":false,\"description\":\"Create themes and override colors, font sizes, and styleboxes on Control nodes.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"shader\",\"enabled\":false,\"description\":\"Author shaders: create/read shader files, assign ShaderMaterial, set shader parameters.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"input_map\",\"enabled\":false,\"description\":\"Edit the project's Input Map actions and events (add/remove/clear).\",\"min_godot\":\"4.4\",\"tools\":[]},{\"name\":\"input\",\"enabled\":false,\"description\":\"Drive a running game: synthesize key/mouse/action input and play input sequences (needs a play session + runtime probe).\",\"min_godot\":null,\"tools\":[]},{\"name\":\"testing\",\"enabled\":false,\"description\":\"Automated play-testing: run scenarios, assert live node state, diff screenshots, and fuzz with random input.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"profiling\",\"enabled\":false,\"description\":\"Read Godot performance monitors (FPS, draw calls, memory, physics) for the editor or a running game.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"batch\",\"enabled\":false,\"description\":\"Operate over many nodes/scenes: find by type, batch-set a property, cross-scene edits, and dependency analysis.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"analysis\",\"enabled\":false,\"description\":\"Static project analysis: unused resources, signal flow, circular script dependencies, and scene-complexity stats.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"export\",\"enabled\":false,\"description\":\"Drive the export pipeline: list presets, report export info, and run an export (needs export templates).\",\"min_godot\":null,\"tools\":[]},{\"name\":\"debugger\",\"enabled\":false,\"description\":\"Debugger breakpoint control: set, remove, clear breakpoints and force breaks in a running game (needs a play session).\",\"min_godot\":null,\"tools\":[]},{\"name\":\"asset_import\",\"enabled\":false,\"description\":\"Import external assets (local files or URLs) into the project and assemble PBR materials from textures.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"visual_shader\",\"enabled\":false,\"description\":\"Create and edit Visual Shader node graphs: create shaders, add nodes, wire connections, and set node parameters.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"project_scaffold\",\"enabled\":false,\"description\":\"Generate a project skeleton (directories, settings, autoloads, root scene) for common game types so agents start from a known structure.\",\"min_godot\":null,\"tools\":[]},{\"name\":\"composite\",\"enabled\":false,\"description\":\"Macro tools that collapse multi-step scene edits into one atomic, single-undo round-trip (compose a node with script/children, batch-create nodes, apply many edits at once). Individual scene_edit tools still work.\",\"min_godot\":null,\"tools\":[]}]",
+   "type": "text"
+  }
+ ],
+ "isError": false,
+ "structuredContent": {
+  "result": [
+   {
+    "name": "core",
+    "enabled": true,
+    "description": "Always-on diagnostics and toolset management.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "inspection",
+    "enabled": true,
+    "description": "Read-only project, scene, and node inspection.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "scene_edit",
+    "enabled": false,
+    "description": "Create, modify, and delete nodes, scripts, signals, and scenes (mutating + destructive).",
+    "min_godot": "4.4",
+    "tools": []
+   },
+   {
+    "name": "runtime",
+    "enabled": false,
+    "description": "Run the project headless and capture its output/errors.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "scripts",
+    "enabled": false,
+    "description": "Read, write, and patch GDScript files; check for parse errors.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "resources_edit",
+    "enabled": false,
+    "description": "Read/create/edit resource (.tres) files and register autoloads.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "project",
+    "enabled": false,
+    "description": "Explore the filesystem, search files, read/write project settings, resolve UIDs.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "editor",
+    "enabled": false,
+    "description": "Capture editor screenshots (image content for vision-capable clients).",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "physics",
+    "enabled": false,
+    "description": "Configure physics bodies, collision shapes, layers/masks, and raycasts.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "animation",
+    "enabled": false,
+    "description": "Author animations (tracks/keyframes) and AnimationTree state machines/blend trees.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "scene_3d",
+    "enabled": false,
+    "description": "Build 3D scenes: mesh instances, cameras, lights, WorldEnvironment, and GridMap cells.",
+    "min_godot": "4.4",
+    "tools": []
+   },
+   {
+    "name": "particles",
+    "enabled": false,
+    "description": "Create/configure GPU particle systems: process material, color gradients, and VFX presets.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "navigation",
+    "enabled": false,
+    "description": "Author navigation: regions, agents, navmesh baking, and navigation layers.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "audio",
+    "enabled": false,
+    "description": "Set up audio: stream players, audio bus layout, and bus effects.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "tilemap",
+    "enabled": false,
+    "description": "Edit TileMap/TileMapLayer cells: set, fill rect, get, clear, list layers.",
+    "min_godot": "4.4",
+    "tools": []
+   },
+   {
+    "name": "theme_ui",
+    "enabled": false,
+    "description": "Create themes and override colors, font sizes, and styleboxes on Control nodes.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "shader",
+    "enabled": false,
+    "description": "Author shaders: create/read shader files, assign ShaderMaterial, set shader parameters.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "input_map",
+    "enabled": false,
+    "description": "Edit the project's Input Map actions and events (add/remove/clear).",
+    "min_godot": "4.4",
+    "tools": []
+   },
+   {
+    "name": "input",
+    "enabled": false,
+    "description": "Drive a running game: synthesize key/mouse/action input and play input sequences (needs a play session + runtime probe).",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "testing",
+    "enabled": false,
+    "description": "Automated play-testing: run scenarios, assert live node state, diff screenshots, and fuzz with random input.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "profiling",
+    "enabled": false,
+    "description": "Read Godot performance monitors (FPS, draw calls, memory, physics) for the editor or a running game.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "batch",
+    "enabled": false,
+    "description": "Operate over many nodes/scenes: find by type, batch-set a property, cross-scene edits, and dependency analysis.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "analysis",
+    "enabled": false,
+    "description": "Static project analysis: unused resources, signal flow, circular script dependencies, and scene-complexity stats.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "export",
+    "enabled": false,
+    "description": "Drive the export pipeline: list presets, report export info, and run an export (needs export templates).",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "debugger",
+    "enabled": false,
+    "description": "Debugger breakpoint control: set, remove, clear breakpoints and force breaks in a running game (needs a play session).",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "asset_import",
+    "enabled": false,
+    "description": "Import external assets (local files or URLs) into the project and assemble PBR materials from textures.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "visual_shader",
+    "enabled": false,
+    "description": "Create and edit Visual Shader node graphs: create shaders, add nodes, wire connections, and set node parameters.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "project_scaffold",
+    "enabled": false,
+    "description": "Generate a project skeleton (directories, settings, autoloads, root scene) for common game types so agents start from a known structure.",
+    "min_godot": null,
+    "tools": []
+   },
+   {
+    "name": "composite",
+    "enabled": false,
+    "description": "Macro tools that collapse multi-step scene edits into one atomic, single-undo round-trip (compose a node with script/children, batch-create nodes, apply many edits at once). Individual scene_edit tools still work.",
+    "min_godot": null,
+    "tools": []
+   }
+  ]
+ }
+}

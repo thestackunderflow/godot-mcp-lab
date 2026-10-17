@@ -1,0 +1,26 @@
+{
+ "godot": "4.7.2.stable.official.ed1daf0bf",
+ "health": {
+  "server": "godot-mcp",
+  "version": "2026.10.15",
+  "transport": "stdio",
+  "bridge_url": "ws://localhost:9080",
+  "bridge_connected": true,
+  "addon_version": "2026.10.15",
+  "version_notice": null,
+  "bridge_bind_error": null
+ },
+ "initialize_serverInfo": {
+  "name": "godot-mcp",
+  "version": "4.1.0",
+  "websiteUrl": "https://github.com/hybridindie/godot-mcp"
+ },
+ "protocol": "2025-06-18",
+ "pip": [
+  "fastmcp==4.1.0\n",
+  "fastmcp-slim==4.1.0\n",
+  "fastmcp-tasks==4.1.0\n",
+  "godot-editor-mcp==2026.10.15\n",
+  "mcp==2.3.0\n"
+ ]
+}

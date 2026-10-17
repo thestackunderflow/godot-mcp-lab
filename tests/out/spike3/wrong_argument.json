@@ -1,0 +1,9 @@
+{
+ "content": [
+  {
+   "text": "Error calling tool 'godot_enable_toolset': Got unexpected keyword argument(s): toolset",
+   "type": "text"
+  }
+ ],
+ "isError": true
+}

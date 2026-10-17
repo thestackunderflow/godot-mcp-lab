@@ -1,0 +1,2183 @@
+[
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Report server version and whether the Godot editor bridge is connected.\n\nUse this first to confirm the server is up and that Godot is reachable\nbefore issuing other commands. Also reports the connected addon's version\nand flags a server↔addon version mismatch. Never mutates anything.",
+  "inputSchema": {
+   "properties": {},
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_health_check",
+  "outputSchema": {
+   "properties": {
+    "server": {
+     "type": "string"
+    },
+    "version": {
+     "type": "string"
+    },
+    "transport": {
+     "type": "string"
+    },
+    "bridge_url": {
+     "type": "string"
+    },
+    "bridge_connected": {
+     "type": "boolean"
+    },
+    "addon_version": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "version_notice": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "bridge_bind_error": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    }
+   },
+   "required": [
+    "server",
+    "version",
+    "transport",
+    "bridge_url",
+    "bridge_connected"
+   ],
+   "type": "object",
+   "description": "Server status and Godot bridge connection state."
+  },
+  "title": "Godot Health Check"
+ },
+ {
+  "_meta": {
+   "safety_class": "mutating",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "destructiveHint": false,
+   "readOnlyHint": false
+  },
+  "description": "Undo the last ``count`` editor actions on the current scene's history.\n\nWith ``dry_run=True``, previews (``has_undo`` + ``would_undo_next``) without\nundoing. Otherwise returns ``{undone, requested, last_action,\nnothing_to_undo}``. Undoing an empty history is a no-op (``undone == 0``,\n``nothing_to_undo == True``), not an error — the reversibility ledger decides\nwhat that means.\n\nNo node/scene target to precondition — ``route()`` already surfaces a\ndisconnected bridge as a structured ``BRIDGE_DISCONNECTED`` error.",
+  "inputSchema": {
+   "properties": {
+    "count": {
+     "default": 1,
+     "type": "integer"
+    },
+    "dry_run": {
+     "default": false,
+     "type": "boolean"
+    }
+   },
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_undo",
+  "outputSchema": {
+   "properties": {
+    "dry_run": {
+     "title": "Dry Run",
+     "type": "boolean"
+    },
+    "requested": {
+     "title": "Requested",
+     "type": "integer"
+    },
+    "undone": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Undone"
+    },
+    "last_action": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Last Action"
+    },
+    "nothing_to_undo": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Nothing To Undo"
+    },
+    "has_undo": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Has Undo"
+    },
+    "would_undo_next": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Would Undo Next"
+    }
+   },
+   "required": [
+    "dry_run",
+    "requested"
+   ],
+   "type": "object",
+   "title": "UndoResult"
+  },
+  "title": "Godot Undo"
+ },
+ {
+  "_meta": {
+   "safety_class": "mutating",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "destructiveHint": false,
+   "readOnlyHint": false
+  },
+  "description": "Redo the last ``count`` undone editor actions on the current scene's history.\n\nThe mirror of ``godot_undo``: with ``dry_run=True``, previews (``has_redo`` +\n``would_redo_next``) without redoing; otherwise returns ``{redone, requested,\nlast_action, nothing_to_redo}``. Redoing with nothing to redo is a no-op\n(``redone == 0``, ``nothing_to_redo == True``), not an error. Use\n``godot_list_history`` first when unsure which direction is available.",
+  "inputSchema": {
+   "properties": {
+    "count": {
+     "default": 1,
+     "type": "integer"
+    },
+    "dry_run": {
+     "default": false,
+     "type": "boolean"
+    }
+   },
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_redo",
+  "outputSchema": {
+   "properties": {
+    "dry_run": {
+     "title": "Dry Run",
+     "type": "boolean"
+    },
+    "requested": {
+     "title": "Requested",
+     "type": "integer"
+    },
+    "redone": {
+     "anyOf": [
+      {
+       "type": "integer"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Redone"
+    },
+    "last_action": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Last Action"
+    },
+    "nothing_to_redo": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Nothing To Redo"
+    },
+    "has_redo": {
+     "anyOf": [
+      {
+       "type": "boolean"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Has Redo"
+    },
+    "would_redo_next": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null,
+     "title": "Would Redo Next"
+    }
+   },
+   "required": [
+    "dry_run",
+    "requested"
+   ],
+   "type": "object",
+   "title": "RedoResult"
+  },
+  "title": "Godot Redo"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Inspect the current scene's editor undo history before mutating.\n\nReturns the version counter (increments on every committed action — a\ncheap change-detector), ``has_undo`` / ``has_redo`` availability, the\ncurrent action name, the history depth, and the most recent action\nnames (capped, most recent last). Empty history returns zero-values,\nnot an error. Use it to orient before ``godot_undo`` / ``godot_redo``.",
+  "inputSchema": {
+   "properties": {},
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_list_history",
+  "outputSchema": {
+   "properties": {
+    "version": {
+     "type": "integer"
+    },
+    "has_undo": {
+     "type": "boolean"
+    },
+    "has_redo": {
+     "type": "boolean"
+    },
+    "can_redo": {
+     "type": "boolean"
+    },
+    "current_action": {
+     "type": "string"
+    },
+    "depth": {
+     "type": "integer"
+    },
+    "recent": {
+     "items": {
+      "description": "One editor undo-history action, named for agent orientation.",
+      "properties": {
+       "name": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "name"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "version",
+    "has_undo",
+    "has_redo",
+    "can_redo",
+    "current_action",
+    "depth",
+    "recent"
+   ],
+   "type": "object",
+   "description": "``godot_list_history`` response: the editor history's orientation data.\n\n``version`` increments on every committed action — a cheap change-detector\nthe agent can compare across calls. ``depth`` counts the history entries\n(``get_history_count``, 4.4+); ``recent`` names up to 20 entries, most\nrecent last (``get_action_name`` indices are 0-based over the history).\n``can_redo`` is the #529 ticket's field name — a documented alias of\n``has_redo``, emitted so the envelope matches the issue's field list."
+  },
+  "title": "Godot List History"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Describe an engine class's ClassDB metadata: settable properties\n(with defaults and types), methods (typed args + return), signals,\ninteger constants, enums, the inheritance chain, and instantiability.\n\nUse BEFORE setting properties or calling methods by trial-and-error:\nthe ``type`` fields are Variant.Type names — exactly the shapes the\ncoercion layer accepts for ``set_node_property`` values. Engine classes\nonly (script ``class_name`` globals are not in ClassDB; an unknown name\nreturns VALIDATION_ERROR with did-you-mean suggestions). Default flags\nlist the class's OWN members; ``include_inherited=True`` widens every\nlist to the full ancestry; ``include_private=True`` keeps\n``_``-prefixed entries.",
+  "inputSchema": {
+   "properties": {
+    "class_name": {
+     "type": "string"
+    },
+    "include_inherited": {
+     "default": false,
+     "type": "boolean"
+    },
+    "include_private": {
+     "default": false,
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "class_name"
+   ],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_describe_class",
+  "outputSchema": {
+   "properties": {
+    "class_name": {
+     "type": "string"
+    },
+    "inherits": {
+     "type": "string"
+    },
+    "inherits_chain": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "can_instantiate": {
+     "type": "boolean"
+    },
+    "properties": {
+     "type": "array",
+     "items": {
+      "properties": {
+       "name": {
+        "type": "string"
+       },
+       "type": {
+        "type": "string"
+       },
+       "default": {}
+      },
+      "required": [
+       "name",
+       "type",
+       "default"
+      ],
+      "type": "object"
+     }
+    },
+    "methods": {
+     "items": {
+      "properties": {
+       "name": {
+        "type": "string"
+       },
+       "args": {
+        "items": {
+         "properties": {
+          "name": {
+           "type": "string"
+          },
+          "type": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "name",
+          "type"
+         ],
+         "type": "object"
+        },
+        "type": "array"
+       },
+       "return_type": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "name",
+       "args",
+       "return_type"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    },
+    "signals": {
+     "items": {
+      "properties": {
+       "name": {
+        "type": "string"
+       },
+       "args": {
+        "items": {
+         "properties": {
+          "name": {
+           "type": "string"
+          },
+          "type": {
+           "type": "string"
+          }
+         },
+         "required": [
+          "name",
+          "type"
+         ],
+         "type": "object"
+        },
+        "type": "array"
+       }
+      },
+      "required": [
+       "name",
+       "args"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    },
+    "constants": {
+     "items": {
+      "properties": {
+       "name": {
+        "type": "string"
+       },
+       "value": {
+        "type": "integer"
+       },
+       "enum": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "name",
+       "value",
+       "enum"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    },
+    "enums": {
+     "items": {
+      "properties": {
+       "name": {
+        "type": "string"
+       },
+       "members": {
+        "items": {
+         "type": "string"
+        },
+        "type": "array"
+       }
+      },
+      "required": [
+       "name",
+       "members"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "class_name",
+    "inherits",
+    "inherits_chain",
+    "can_instantiate",
+    "properties",
+    "methods",
+    "signals",
+    "constants",
+    "enums"
+   ],
+   "type": "object"
+  },
+  "title": "Godot Describe Class"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Get project-level context: name, Godot version, main scene, autoloads,\nand project-defined input actions. Call this to orient before editing.",
+  "inputSchema": {
+   "properties": {},
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_get_project_info",
+  "outputSchema": {
+   "properties": {
+    "name": {
+     "type": "string"
+    },
+    "godot_version": {
+     "type": "string"
+    },
+    "main_scene": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "project_path": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "autoloads": {
+     "additionalProperties": {
+      "type": "string"
+     },
+     "type": "object"
+    },
+    "input_actions": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "name",
+    "godot_version"
+   ],
+   "type": "object",
+   "description": "Project-level context."
+  },
+  "title": "Godot Inspection Get Project Info"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Get the currently open scene's path and name. Returns ``is_open=False``\nwhen no scene is open (not an error).",
+  "inputSchema": {
+   "properties": {},
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_get_active_scene",
+  "outputSchema": {
+   "properties": {
+    "is_open": {
+     "type": "boolean"
+    },
+    "path": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "name": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "dirty": {
+     "default": false,
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "is_open"
+   ],
+   "type": "object",
+   "description": "The currently open scene, or ``is_open=False`` when none is open."
+  },
+  "title": "Godot Inspection Get Active Scene"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "List the project's scene files (``res://*.tscn``) and their editor state —\nwhich is the ``main_scene``, which are open, and which is active.\n\nCall this to decide, when no scene is open, whether to OPEN an existing scene\n(a modification / enhancement / bugfix of something already there) or CREATE a\nnet-new one:\n  - no scenes at all -> the project is empty; godot_scene_edit_create_scene(\n    root_type=…, scene_path=…) to start one (enable the scene_edit toolset first).\n  - exactly one scene -> godot_scene_edit_open_scene(scene_path=that path).\n  - several scenes -> open the one the request targets, or ask which to use.\nReturns an empty ``scenes`` list for a project with no scenes yet (not an error).",
+  "inputSchema": {
+   "properties": {},
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_list_scenes",
+  "outputSchema": {
+   "properties": {
+    "scenes": {
+     "items": {
+      "description": "One project scene file and its editor state (#304).",
+      "properties": {
+       "path": {
+        "type": "string"
+       },
+       "is_main": {
+        "default": false,
+        "type": "boolean"
+       },
+       "is_open": {
+        "default": false,
+        "type": "boolean"
+       },
+       "is_active": {
+        "default": false,
+        "type": "boolean"
+       }
+      },
+      "required": [
+       "path"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    },
+    "main_scene": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    }
+   },
+   "type": "object",
+   "description": "The project's scene files + which is main, for open-vs-create decisions (#304).\n\n``scenes`` is empty for a project with no scenes yet (a net-new signal, not an error)."
+  },
+  "title": "Godot Inspection List Scenes"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Get the open scene as a recursive tree of {name, type, path, script, children}.\n\nEach node carries a scene-relative ``path`` (root \".\") — pass it verbatim to\nset_node_property / create_node(parent_path) / attach_script; never rebuild it\nby hand. ``max_depth`` bounds child levels (-1 unlimited, 0 root only); a tree\nover the output limit returns lightweight with ``truncated=true``. ``tree`` is\nnull when no scene is open. For the *running* game use get_game_scene_tree().\nSee docs/tool-contracts.md for ``lightweight``.",
+  "inputSchema": {
+   "properties": {
+    "max_depth": {
+     "default": -1,
+     "maximum": 1000,
+     "minimum": -1,
+     "type": "integer"
+    },
+    "lightweight": {
+     "default": false,
+     "type": "boolean"
+    }
+   },
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_get_scene_tree",
+  "outputSchema": {
+   "properties": {
+    "tree": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "truncated": {
+     "default": false,
+     "type": "boolean"
+    },
+    "hint": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    }
+   },
+   "type": "object",
+   "description": "The active scene tree, or ``tree=None`` when no scene is open."
+  },
+  "title": "Godot Inspection Get Scene Tree"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Get the node currently selected in the editor — its path, type, script,\nproperties, and child names. Returns ``selected=None`` when nothing is\nselected.",
+  "inputSchema": {
+   "properties": {},
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_get_selected_node",
+  "outputSchema": {
+   "properties": {
+    "selected": {
+     "anyOf": [
+      {
+       "description": "Full detail for a single node (path, type, script, properties, children).",
+       "properties": {
+        "node_path": {
+         "type": "string"
+        },
+        "type": {
+         "type": "string"
+        },
+        "script": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null
+        },
+        "properties": {
+         "type": "object",
+         "additionalProperties": true
+        },
+        "children": {
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        }
+       },
+       "required": [
+        "node_path",
+        "type"
+       ],
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    }
+   },
+   "type": "object",
+   "description": "The selected node, or ``selected=None`` when nothing is selected."
+  },
+  "title": "Godot Inspection Get Selected Node"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Get a node's detail by scene-relative path (e.g. \"Player/Sprite2D\"):\ntype, attached script, exported/set properties, and child names. Errors\nwith RESOURCE_NOT_FOUND if the path doesn't resolve, or PRECONDITION_FAILED\nif no scene is open.",
+  "inputSchema": {
+   "properties": {
+    "node_path": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "node_path"
+   ],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_get_node_properties",
+  "outputSchema": {
+   "properties": {
+    "node_path": {
+     "type": "string"
+    },
+    "type": {
+     "type": "string"
+    },
+    "script": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "properties": {
+     "type": "object",
+     "additionalProperties": true
+    },
+    "children": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "node_path",
+    "type"
+   ],
+   "type": "object",
+   "description": "Full detail for a single node (path, type, script, properties, children)."
+  },
+  "title": "Godot Inspection Get Node Properties"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Read a single ``property`` by name from the node at ``node_path`` — including\n**built-in** Godot properties (position, scale, modulate, collision_layer,\nmaterial, theme, …) that ``get_node_properties`` omits (it returns only\nscript-declared variables). Returns ``{value, exists}``; ``exists=false``\n(value null) when the node has no such property. The value is JSON-coerced\n(Vector2 as {\"x\",\"y\"}, Color, NodePath as string). Use it to snapshot a value\nbefore ``set_node_property`` — for verification or rollback. Errors with\nRESOURCE_NOT_FOUND if the path doesn't resolve, or PRECONDITION_FAILED if no\nscene is open.",
+  "inputSchema": {
+   "properties": {
+    "node_path": {
+     "type": "string"
+    },
+    "property": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "node_path",
+    "property"
+   ],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_get_node_property",
+  "outputSchema": {
+   "properties": {
+    "node_path": {
+     "type": "string"
+    },
+    "property": {
+     "type": "string"
+    },
+    "value": {
+     "default": null,
+     "title": "Value"
+    },
+    "exists": {
+     "default": false,
+     "type": "boolean"
+    }
+   },
+   "required": [
+    "node_path",
+    "property"
+   ],
+   "type": "object",
+   "description": "A single node property read (issue #215), including built-in Godot properties.\n\n``value`` is JSON-coerced (see type_coerce.gd); ``exists`` is false (and ``value``\nnull) when the node has no such property."
+  },
+  "title": "Godot Inspection Get Node Property"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Return the flat list of valid property names for the node at\n``node_path``, plus its runtime class name. Use this to discover what\nproperties you can set before calling ``set_node_property``.",
+  "inputSchema": {
+   "properties": {
+    "node_path": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "node_path"
+   ],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_get_node_property_list",
+  "outputSchema": {
+   "properties": {
+    "node_path": {
+     "type": "string"
+    },
+    "type": {
+     "default": "",
+     "type": "string"
+    },
+    "properties": {
+     "type": "array",
+     "items": {
+      "type": "string"
+     }
+    }
+   },
+   "required": [
+    "node_path"
+   ],
+   "type": "object",
+   "description": "All property names for a node, returned by get_node_property_list."
+  },
+  "title": "Godot Inspection Get Node Property List"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "List the groups the node at ``node_path`` belongs to (``{groups: [name]}``),\nexcluding editor-internal groups (names beginning with \"_\"). Use it to snapshot\nmembership before ``add_to_group`` / ``remove_from_group`` (or a delete) so the\nchange is reversible. Errors with RESOURCE_NOT_FOUND if the path doesn't resolve,\nor PRECONDITION_FAILED if no scene is open.",
+  "inputSchema": {
+   "properties": {
+    "node_path": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "node_path"
+   ],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_get_node_groups",
+  "outputSchema": {
+   "properties": {
+    "node_path": {
+     "type": "string"
+    },
+    "groups": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "node_path"
+   ],
+   "type": "object",
+   "description": "A node's group memberships (issue #216), editor-internal groups excluded.\n\nInverts ``add_to_group`` / ``remove_from_group`` and lets\n``godot_scene_edit_delete_node`` restore\nmembership."
+  },
+  "title": "Godot Inspection Get Node Groups"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Snapshot a subtree as a stable dict (issue #535): node paths, types, script\npaths, and per-node property values. Captured by default: script vars,\ntransforms (position/rotation/scale where the class exposes them), and group\nmemberships — so transform/group changes show in a diff without naming them.\n``properties`` adds further built-ins by name. Returns a ``snapshot_id`` that\nreferences the server-side store — pass it to ``diff_snapshots`` to verify a\nbatch mutation in one round-trip (mutate → diff → assert) instead of N\nre-reads. ``max_depth`` caps depth (-1 = unlimited), like ``get_scene_tree``.\nErrors with RESOURCE_NOT_FOUND if the path doesn't resolve, or\nPRECONDITION_FAILED if no scene is open.",
+  "inputSchema": {
+   "properties": {
+    "node_path": {
+     "default": ".",
+     "type": "string"
+    },
+    "properties": {
+     "anyOf": [
+      {
+       "items": {
+        "type": "string"
+       },
+       "type": "array"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "max_depth": {
+     "default": -1,
+     "maximum": 1000,
+     "minimum": -1,
+     "type": "integer"
+    }
+   },
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_snapshot_subtree",
+  "outputSchema": {
+   "properties": {
+    "snapshot_id": {
+     "type": "string"
+    },
+    "node_path": {
+     "type": "string"
+    },
+    "snapshot": {
+     "additionalProperties": true,
+     "type": "object"
+    }
+   },
+   "required": [
+    "snapshot_id",
+    "node_path"
+   ],
+   "type": "object",
+   "description": "A subtree snapshot (issue #535): a stable id + the serialized subtree.\n\n``snapshot_id`` references the server-side bounded store — pass it to\n``diff_snapshots`` (as ``before_id``/``after_id``) instead of re-serializing."
+  },
+  "title": "Godot Inspection Snapshot Subtree"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "inspection"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Diff two subtree snapshots taken with ``snapshot_subtree`` (issue #535):\n``{added: [node], removed: [node], changed: [{node, property, before, after}]}``.\nAll three lists empty means identical. With ``after_id`` unset, the tool\nre-reads the same ``node_path`` live and diffs snapshot-vs-now — the natural\nacceptance check after ``batch_set_property`` / ``apply_node_edits`` /\n``run_commands``. Errors with RESOURCE_NOT_FOUND for an unknown/evicted id\n(re-snapshot, the store is bounded).",
+  "inputSchema": {
+   "properties": {
+    "before_id": {
+     "type": "string"
+    },
+    "after_id": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "node_path": {
+     "default": ".",
+     "type": "string"
+    }
+   },
+   "required": [
+    "before_id"
+   ],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_inspection_diff_snapshots",
+  "outputSchema": {
+   "properties": {
+    "added": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "removed": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "changed": {
+     "items": {
+      "description": "One property-level difference between two snapshots (issue #535).",
+      "properties": {
+       "node": {
+        "type": "string"
+       },
+       "property": {
+        "type": "string"
+       },
+       "before": {
+        "default": null,
+        "title": "Before"
+       },
+       "after": {
+        "default": null,
+        "title": "After"
+       }
+      },
+      "required": [
+       "node",
+       "property"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    }
+   },
+   "type": "object",
+   "description": "The diff of two subtree snapshots (issue #535).\n\n``added``/``removed`` list node paths; ``changed`` lists per-property\nbefore/after pairs (JSON-coerced shapes). All three empty = identical."
+  },
+  "title": "Godot Inspection Diff Snapshots"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Read a godot:// context resource by URI — the fallback for MCP clients\nwithout resource-protocol support. Known URIs: godot://project/info,\ngodot://scene/current, godot://scene/tree, godot://scene/tree/{max_depth},\ngodot://node/selected.",
+  "inputSchema": {
+   "properties": {
+    "uri": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "uri"
+   ],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_read_resource",
+  "outputSchema": {
+   "properties": {
+    "result": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "result"
+   ],
+   "type": "object",
+   "x-fastmcp-wrap-result": true
+  },
+  "title": "Godot Read Resource"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Run a comprehensive debug check on the project and return a unified report.\n\nThis aggregates multiple diagnostics into one call so you (or the LLM) can\nspot problems quickly without calling each tool individually.\n\nChecks performed:\n1. Parse errors across all GDScript files\n2. Active scene tree structure (nodes, scripts, properties)\n3. Headless run of the project (or a specific scene) capturing errors/warnings\n4. Bridge connection state and Godot version\n\n``scene`` — optional res:// path to focus the headless run on a specific scene.\n``expected_timeout`` — set true when the game legitimately runs until killed\n(sandbox/live-service games with no quit path): a timeout then means the run\nbehaved as designed and is not reported as a finding.",
+  "inputSchema": {
+   "properties": {
+    "scene": {
+     "default": "",
+     "type": "string"
+    },
+    "timeout_seconds": {
+     "default": 5.0,
+     "maximum": 3600.0,
+     "minimum": 0.1,
+     "type": "number"
+    },
+    "expected_timeout": {
+     "default": false,
+     "type": "boolean"
+    }
+   },
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_debug_workflow",
+  "outputSchema": {
+   "properties": {
+    "bridge": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "scene_tree": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "run": {
+     "anyOf": [
+      {
+       "additionalProperties": true,
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "parse": {
+     "additionalProperties": true,
+     "type": "object"
+    },
+    "findings": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "suggestions": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "bridge",
+    "scene_tree",
+    "run",
+    "parse",
+    "findings",
+    "suggestions"
+   ],
+   "type": "object",
+   "description": "Unified debug report returned by ``debug_workflow``."
+  },
+  "title": "Godot Debug Workflow"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "List every available tool grouped by its safety class\n(read_only / mutating / destructive / runtime). Call this to learn which\ntools are safe to call freely and which need ``dry_run``/``confirm``.",
+  "inputSchema": {
+   "properties": {},
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_list_tools_by_safety_class",
+  "outputSchema": {
+   "properties": {
+    "tools_by_safety_class": {
+     "additionalProperties": {
+      "items": {
+       "type": "string"
+      },
+      "type": "array"
+     },
+     "description": "Tool names keyed by safety_class (read_only / mutating / destructive / runtime); unclassified tools (if any) appear under 'unclassified'.",
+     "type": "object"
+    }
+   },
+   "required": [
+    "tools_by_safety_class"
+   ],
+   "type": "object",
+   "description": "Result of ``list_tools_by_safety_class`` — tool names grouped by safety class."
+  },
+  "title": "Godot List Tools By Safety Class"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "List the available toolsets (tool categories) and whether each is currently\nenabled. Enable a toolset with enable_toolset before using its tools.",
+  "inputSchema": {
+   "properties": {},
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_list_toolsets",
+  "outputSchema": {
+   "properties": {
+    "result": {
+     "items": {
+      "description": "One toolset's current exposure state.",
+      "properties": {
+       "name": {
+        "type": "string"
+       },
+       "enabled": {
+        "type": "boolean"
+       },
+       "description": {
+        "type": "string"
+       },
+       "min_godot": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null
+       },
+       "tools": {
+        "items": {
+         "description": "One exposed tool's identity + input schema (issue #621).",
+         "properties": {
+          "name": {
+           "type": "string"
+          },
+          "description": {
+           "type": "string"
+          },
+          "input_schema": {
+           "additionalProperties": true,
+           "type": "object"
+          }
+         },
+         "required": [
+          "name",
+          "description",
+          "input_schema"
+         ],
+         "type": "object"
+        },
+        "type": "array"
+       }
+      },
+      "required": [
+       "name",
+       "enabled",
+       "description"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "result"
+   ],
+   "type": "object",
+   "x-fastmcp-wrap-result": true
+  },
+  "title": "Godot List Toolsets"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Expose a toolset's tools for this session. ``category`` is a toolset name\n(e.g. \"scene_edit\"), a **bundle** — ``author`` (build scenes/scripts/assets),\n``playtest`` (run/drive/observe the game), ``ship`` (export) — or a\ncomma-separated list of either (issue #653). A bundle/list enables all its\nmembers in ONE call and returns a combined result whose ``tools`` carries\nevery enabled member tool's schema. Does not change the Godot project.",
+  "inputSchema": {
+   "properties": {
+    "category": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "category"
+   ],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_enable_toolset",
+  "outputSchema": {
+   "properties": {
+    "name": {
+     "type": "string"
+    },
+    "enabled": {
+     "type": "boolean"
+    },
+    "description": {
+     "type": "string"
+    },
+    "min_godot": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "tools": {
+     "items": {
+      "description": "One exposed tool's identity + input schema (issue #621).",
+      "properties": {
+       "name": {
+        "type": "string"
+       },
+       "description": {
+        "type": "string"
+       },
+       "input_schema": {
+        "additionalProperties": true,
+        "type": "object"
+       }
+      },
+      "required": [
+       "name",
+       "description",
+       "input_schema"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "name",
+    "enabled",
+    "description"
+   ],
+   "type": "object",
+   "description": "One toolset's current exposure state."
+  },
+  "title": "Godot Enable Toolset"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Hide a toolset's tools again to keep the active tool surface small. Accepts\na toolset name, a bundle, or a comma-separated list of either (issue #653).",
+  "inputSchema": {
+   "properties": {
+    "category": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "category"
+   ],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_disable_toolset",
+  "outputSchema": {
+   "properties": {
+    "name": {
+     "type": "string"
+    },
+    "enabled": {
+     "type": "boolean"
+    },
+    "description": {
+     "type": "string"
+    },
+    "min_godot": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "tools": {
+     "items": {
+      "description": "One exposed tool's identity + input schema (issue #621).",
+      "properties": {
+       "name": {
+        "type": "string"
+       },
+       "description": {
+        "type": "string"
+       },
+       "input_schema": {
+        "additionalProperties": true,
+        "type": "object"
+       }
+      },
+      "required": [
+       "name",
+       "description",
+       "input_schema"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "name",
+    "enabled",
+    "description"
+   ],
+   "type": "object",
+   "description": "One toolset's current exposure state."
+  },
+  "title": "Godot Disable Toolset"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Check whether a newer godot-mcp release is available.\n\nOpt-in and offline by default: with ``GODOT_MCP_CHECK_UPDATES`` unset the\nresult reports ``enabled: false`` and makes no network request. When enabled\nit queries the release feed and reports ``{current, latest, update_available,\nurl}``; an unreachable feed returns an ``error``/``hint`` rather than failing.\nRead-only — never touches the Godot project.",
+  "inputSchema": {
+   "properties": {},
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_check_for_updates",
+  "outputSchema": {
+   "properties": {
+    "enabled": {
+     "type": "boolean"
+    },
+    "current": {
+     "type": "string"
+    },
+    "latest": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "update_available": {
+     "default": false,
+     "type": "boolean"
+    },
+    "url": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "checked_at": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "error": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "hint": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    }
+   },
+   "required": [
+    "enabled",
+    "current"
+   ],
+   "type": "object",
+   "description": "The result of an update check — always a value, never a raised error."
+  },
+  "title": "Godot Check For Updates"
+ },
+ {
+  "_meta": {
+   "safety_class": "read_only",
+   "fastmcp": {
+    "tags": [
+     "core"
+    ]
+   }
+  },
+  "annotations": {
+   "idempotentHint": true,
+   "readOnlyHint": true
+  },
+  "description": "Return a comprehensive snapshot of the server's capabilities, toolsets,\nprompts, bridge state, and common troubleshooting scenarios.\n\nUse this at the **start of every session** to orient the agent:\nit tells you which toolsets are available, how many tools each has,\nwhether Godot is connected, what scene is open, and what to do next.",
+  "inputSchema": {
+   "properties": {},
+   "required": [],
+   "type": "object",
+   "additionalProperties": false
+  },
+  "name": "godot_get_server_info",
+  "outputSchema": {
+   "properties": {
+    "server": {
+     "type": "string"
+    },
+    "version": {
+     "type": "string"
+    },
+    "contract_version": {
+     "type": "integer"
+    },
+    "min_compatible_contract": {
+     "type": "integer"
+    },
+    "transport": {
+     "type": "string"
+    },
+    "toolsets": {
+     "items": {
+      "description": "Summary of one toolset for the diagnostics report.",
+      "properties": {
+       "name": {
+        "type": "string"
+       },
+       "enabled": {
+        "type": "boolean"
+       },
+       "description": {
+        "type": "string"
+       },
+       "tool_count": {
+        "type": "integer"
+       },
+       "min_godot": {
+        "anyOf": [
+         {
+          "type": "string"
+         },
+         {
+          "type": "null"
+         }
+        ],
+        "default": null
+       }
+      },
+      "required": [
+       "name",
+       "enabled",
+       "description",
+       "tool_count"
+      ],
+      "type": "object"
+     },
+     "type": "array"
+    },
+    "prompts": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "resources": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    },
+    "bridge": {
+     "description": "Bridge and editor state snapshot.",
+     "properties": {
+      "connected": {
+       "type": "boolean"
+      },
+      "url": {
+       "type": "string"
+      },
+      "godot_version": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      },
+      "project_name": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      },
+      "project_path": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      },
+      "addon_version": {
+       "anyOf": [
+        {
+         "type": "string"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      },
+      "addon_commands": {
+       "anyOf": [
+        {
+         "items": {
+          "type": "string"
+         },
+         "type": "array"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      },
+      "peer_identity": {
+       "anyOf": [
+        {
+         "additionalProperties": {
+          "type": "string"
+         },
+         "type": "object"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      },
+      "backend": {
+       "anyOf": [
+        {
+         "description": "Scripting backend capability of the connected editor/project (issue #207).",
+         "properties": {
+          "csharp_supported": {
+           "default": false,
+           "type": "boolean"
+          },
+          "csharp_project": {
+           "default": false,
+           "type": "boolean"
+          },
+          "csharp_build": {
+           "default": false,
+           "type": "boolean"
+          }
+         },
+         "type": "object"
+        },
+        {
+         "type": "null"
+        }
+       ],
+       "default": null
+      }
+     },
+     "required": [
+      "connected",
+      "url"
+     ],
+     "type": "object"
+    },
+    "active_scene": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "addon_drift_warning": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "version_notice": {
+     "anyOf": [
+      {
+       "type": "string"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "update": {
+     "anyOf": [
+      {
+       "description": "The result of an update check — always a value, never a raised error.",
+       "properties": {
+        "enabled": {
+         "type": "boolean"
+        },
+        "current": {
+         "type": "string"
+        },
+        "latest": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null
+        },
+        "update_available": {
+         "default": false,
+         "type": "boolean"
+        },
+        "url": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null
+        },
+        "checked_at": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null
+        },
+        "error": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null
+        },
+        "hint": {
+         "anyOf": [
+          {
+           "type": "string"
+          },
+          {
+           "type": "null"
+          }
+         ],
+         "default": null
+        }
+       },
+       "required": [
+        "enabled",
+        "current"
+       ],
+       "type": "object"
+      },
+      {
+       "type": "null"
+      }
+     ],
+     "default": null
+    },
+    "common_errors": {
+     "items": {
+      "additionalProperties": {
+       "type": "string"
+      },
+      "type": "object"
+     },
+     "type": "array"
+    },
+    "next_steps": {
+     "items": {
+      "type": "string"
+     },
+     "type": "array"
+    }
+   },
+   "required": [
+    "server",
+    "version",
+    "contract_version",
+    "min_compatible_contract",
+    "transport",
+    "toolsets",
+    "prompts",
+    "resources",
+    "bridge",
+    "common_errors",
+    "next_steps"
+   ],
+   "type": "object",
+   "description": "Complete server capability and health snapshot.\n\nThis is the authoritative response to ``get_server_info`` — it tells the\nclient everything about what is available, what is enabled, and how to fix\ncommon problems."
+  },
+  "title": "Godot Get Server Info"
+ }
+]
