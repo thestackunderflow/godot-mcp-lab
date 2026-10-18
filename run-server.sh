@@ -9,6 +9,12 @@ set -uo pipefail
 GAME="${GAME:-/work/game}"
 LOGS="${LOGS:-/tmp}"
 DISP="${DISP:-99}"
+# The editor add-on is not committed (game/addons/ is git-ignored): install it from the pinned release zip the image
+# downloaded and checksummed (/opt/godot_mcp_addon.zip), so a fresh clone works. Same 106 files as the lab's original run.
+if [ ! -f "$GAME/addons/godot_mcp/plugin.cfg" ]; then
+  python3 -c "import zipfile,sys; zipfile.ZipFile('/opt/godot_mcp_addon.zip').extractall(sys.argv[1])" "$GAME" \
+    || { echo "could not install the add-on from /opt/godot_mcp_addon.zip" >&2; exit 1; }
+fi
 Xvfb ":$DISP" -screen 0 1280x720x24 >"$LOGS/xvfb.log" 2>&1 &
 XVFB=$!
 export DISPLAY=":$DISP"
