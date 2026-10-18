@@ -1,5 +1,5 @@
 services:
-  # Tests 0-8 (pytest). Each session starts run-server.sh: Xvfb + headless Godot editor + godot-editor-mcp.
+  # Tests 0-9 (pytest). Each session starts run-server.sh: Xvfb + headless Godot editor + godot-editor-mcp.
   tests:
     build: .
     image: godot-mcp-lab:4.7.2

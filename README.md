@@ -21,7 +21,7 @@ and check in a live Godot editor, through MCP.
 
 ```bash
 docker compose build
-docker compose run --rm tests            # tests 0-8
+docker compose run --rm tests            # tests 0-9
 bash claude-run/run-claude.sh            # optional: the real Claude Code session (needs `claude` logged in)
 ```
 
