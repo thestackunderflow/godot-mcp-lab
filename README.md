@@ -42,10 +42,14 @@ Written first and run red (`tests/out/red-phase.log`: stub client), then green (
 5. **Script check.** A missing colon on line 3 is reported as "Unexpected Indent" **on line 4**. The real player
    script parses.
 6. **Closed loop, shipped game** (played in Xvfb, input injected through the runtime probe, velocity read live; each
-   reading arrives ~0.1 s after the press, so gravity has already added ~+100). The first jump reads −371; a second
-   press near the top of the arc (y = 138, 90 px above the ledge) reads +348: no jump.
-7. **Reference double jump.** The same second press, in mid-air, reads −311 (the air jump); a third press, still in
-   the air (y = 122), reads −33: blocked (the jump speeds themselves are −420 and −360).
+   reading arrives ~0.1 s after the press, so gravity has already added ~+100). The first jump reads −387; a second
+   press near the top of the arc (y = 136, about 90 px above the ledge) reads +331: no jump.
+7. **Reference double jump.** The same second press, in mid-air, reads −327 (the air jump); a third press, still in
+   the air (y = 130), reads −50: blocked (the jump speeds themselves are −420 and −360).
+
+   Numbers are from the committed run (`tests/out/06_single_jump.json`, `07_double_jump.json`). Because each reading
+   lands a few frames after the press, they move by a few tens from run to run; the tests check the sign and the
+   jump/no-jump verdict, not the exact value.
 8. **Planted bug.** Walk off the ledge and press jump at y = 316, well above the floor: the bug version keeps falling
    (+621), while the reference jumps (−278).
 9. **Update check.** At start the server's *framework*, FastMCP, asks PyPI for a newer FastMCP (at most every 12 h; it
